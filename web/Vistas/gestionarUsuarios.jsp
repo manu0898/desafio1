@@ -50,7 +50,8 @@
         %>
         
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
-            <br><br><input type="submit" name="volverFranja" value="Volver">
+            <br><br><input type="submit" name="anadirUsuario" value="Añadir usuario">
+            <br><br><input type="submit" name="volverUsuario" value="Volver">
         </form>
         
     </body>

@@ -35,7 +35,7 @@
 
             LinkedList usuarios = ConexionEstatica.obtenerPersonas();
 
-            session.setAttribute("personas", usuarios);
+            session.setAttribute("usuarios", usuarios);
 
             AsignarRol asig = con.Consultar_AsignarRol(correo);
             Rol rol = con.Consultar_Rol(asig.getCodRol());
@@ -87,12 +87,12 @@
                 ConexionEstatica.nueva();
 
                 //recargar la pagina
-                LinkedList personas = ConexionEstatica.obtenerPersonas();
-                session.setAttribute("personas", personas);
+                LinkedList usuarios = ConexionEstatica.obtenerPersonas();
+                session.setAttribute("usuarios", usuarios);
 
                 ConexionEstatica.cerrarBD();
 
-                response.sendRedirect("../Vistas/admin.jsp");
+                response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
 
             }
         }
@@ -135,12 +135,12 @@
                         ConexionEstatica.nueva();
 
                         //recargar la pagina
-                        LinkedList personas = ConexionEstatica.obtenerPersonas();
-                        session.setAttribute("personas", personas);
+                        LinkedList usuarios = ConexionEstatica.obtenerPersonas();
+                        session.setAttribute("usuarios", usuarios);
 
                         ConexionEstatica.cerrarBD();
 
-                        //response.sendRedirect("../Vistas/admin.jsp");
+                        response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
                     }
                 }
 
@@ -315,6 +315,68 @@
     //-------------------------------------------
     if (request.getParameter("verBitacora") != null) {
         response.sendRedirect("../Vistas/verBitacora.jsp");
+    }
+    
+    //--------------------
+    if (request.getParameter("modifCRUDUsuarios") != null) {
+
+        ConexionEstatica.nueva();
+
+        ConexionEstatica con = new ConexionEstatica();
+
+        String correo = request.getParameter("correoCrud");
+        int edad = Integer.parseInt(request.getParameter("edadCrud"));
+        String nombre = request.getParameter("nombreCrud");
+        String apellido = request.getParameter("apellidoCrud");
+
+        con.Modificar_Nombre("Usuario", correo, nombre);
+        con.Modificar_Apellido("Usuario", correo, apellido);
+        con.Modificar_Edad("Usuario", correo, edad);
+
+        //recargar la pagina
+        LinkedList usuarios = ConexionEstatica.obtenerPersonas();
+        session.setAttribute("usuarios", usuarios);
+
+        ConexionEstatica.cerrarBD();
+
+        Bitacora.escribirBitacora("El administrador ha modificado datos de un usuario en la base de datos.");
+
+        response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
+
+    }
+    
+    //-------------------
+    if (request.getParameter("elimCRUDUsuarios") != null) {
+
+        ConexionEstatica.nueva();
+
+        ConexionEstatica con = new ConexionEstatica();
+
+        String correo = request.getParameter("correoCrud");
+
+        con.Borrar_Usuario("Usuario", correo);
+
+        //recargar la pagina
+        LinkedList usuarios = ConexionEstatica.obtenerPersonas();
+        session.setAttribute("usuarios", usuarios);
+        
+        ConexionEstatica.cerrarBD();
+
+        Bitacora.escribirBitacora("El usuario administrador ha eliminado un usuario de la base de datos.");
+        
+        response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
+    }
+    
+    //------------------------------------------
+    if (request.getParameter("anadirUsuario") != null) {
+        session.setAttribute("vieneDeAdmin", "si");
+
+        response.sendRedirect("../Vistas/registro.jsp");
+    }
+    
+    //-------------------------------------------
+    if (request.getParameter("volverUsuario") != null) {
+        response.sendRedirect("../Vistas/ventanaAdminGeneral.jsp");
     }
 
 %>

@@ -151,8 +151,8 @@ public class ConexionEstatica {
         Sentencia_SQL.executeUpdate(Sentencia);
     }
 
-    public void Modificar_Edad(String tabla, String email, int num) throws SQLException {
-        String Sentencia = "UPDATE " + tabla + " SET edad = '" + num + "' WHERE email = '" + email + "'";
+    public void Modificar_Edad(String tabla, String correo, int edad) throws SQLException {
+        String Sentencia = "UPDATE " + tabla + " SET edad = '" + edad + "' WHERE correo = '" + correo + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
     }
 

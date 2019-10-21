@@ -3,6 +3,7 @@ package Modelo;
 import Auxiliar.Constantes;
 import java.sql.*;
 import java.util.HashMap;
+import java.util.Date;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -139,6 +140,26 @@ public class ConexionEstatica {
         }
         return franjasBD;
     }
+    
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    public static LinkedList obtenerReservasFecha(Date fecha, int codAula) {
+        LinkedList franjasBD = new LinkedList<>();
+        Reserva r = null;
+        try {
+            String sentencia = "SELECT * FROM Reserva WHERE fecha = '" + fecha + "' and codAula = '" + codAula + "'";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new Reserva(Conj_Registros.getInt("codAula"), Conj_Registros.getInt("codFranja"), Conj_Registros.getString("profesor"), Conj_Registros.getDate("fecha"));
+                franjasBD.add(r);
+            }
+        } catch (SQLException ex) {
+        }
+        return franjasBD;
+    }
 
     //----------------------------------------------------------
     public void Modificar_Nombre(String tabla, String correo, String nombre) throws SQLException {
@@ -184,6 +205,11 @@ public class ConexionEstatica {
     
     public void Insertar_Aula(String tabla, int codAula, String desc) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codAula + "', '" + desc + "');";
+        Sentencia_SQL.execute(Sentencia);
+    }
+    
+    public void Insertar_Reserva(String tabla, int codAula, int codFranja, String profesor, String fecha) throws SQLException {
+        String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codAula + "', '" + codFranja + "', '" + profesor + "', '" + fecha + "');";
         Sentencia_SQL.execute(Sentencia);
     }
 

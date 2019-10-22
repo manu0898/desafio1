@@ -21,6 +21,11 @@ public class Franja {
         this.finHora = finHora;
     }
     
+    public Franja(String inicioHora, String finHora) {
+        this.inicioHora = inicioHora;
+        this.finHora = finHora;
+    }
+    
     public Franja() {
         
     }

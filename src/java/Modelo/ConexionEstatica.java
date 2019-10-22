@@ -7,6 +7,13 @@ import java.util.Date;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
+/*
+ * Esta select funciona:
+ * SELECT Franja.inicioHora, Franja.finHora, Reserva.Reservado FROM Franja, Reserva WHERE Reserva.codAula = '103' and Reserva.fecha = '2019-10-30' AND Franja.codFranja = Reserva.codFranja
+ * 
+ * Esta funciona introduciendo tú el codFranja:
+ * SELECT Franja.inicioHora, Franja.finHora, Reserva.Reservado FROM Franja, Reserva WHERE Reserva.codAula = '103' and Reserva.fecha = '2019-10-30' AND Franja.codFranja = '1'
+ */
 public class ConexionEstatica {
 
     //********************* Atributos *************************
@@ -100,7 +107,7 @@ public class ConexionEstatica {
         }
         return personasBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -120,7 +127,7 @@ public class ConexionEstatica {
         }
         return aulasBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -140,27 +147,88 @@ public class ConexionEstatica {
         }
         return franjasBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
      * @return
      */
-    public static LinkedList obtenerReservasFecha(Date fecha, int codAula) {
+    public static LinkedList obtenerFranjasHorariasHoras() {
         LinkedList franjasBD = new LinkedList<>();
-        Reserva r = null;
+        Franja f = null;
         try {
-            String sentencia = "SELECT * FROM Reserva WHERE fecha = '" + fecha + "' and codAula = '" + codAula + "'";
+            String sentencia = "SELECT * FROM Franja";
             ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
             while (Conj_Registros.next()) {
-                r = new Reserva(Conj_Registros.getInt("codAula"), Conj_Registros.getInt("codFranja"), Conj_Registros.getString("profesor"), Conj_Registros.getDate("fecha"));
-                franjasBD.add(r);
+                f = new Franja(Conj_Registros.getString("inicioHora"), Conj_Registros.getString("finHora"));
+                franjasBD.add(f);
             }
         } catch (SQLException ex) {
         }
         return franjasBD;
     }
 
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    /*
+    public static LinkedList obtenerReservasFecha(String fecha, int codAula) {
+        LinkedList franjasBD = new LinkedList<>();
+        Reserva r = null;
+
+        for (int i = 1; i < 7; i++) {
+
+            try {
+                String sentencia = "SELECT Franja.inicioHora, Franja.finHora, Reserva.Reservado FROM Franja, Reserva WHERE Reserva.codAula = '" + codAula + "' and Reserva.fecha = '" + fecha + "' and Franja.codFranja = '" + i +"'";
+                ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+                while (Conj_Registros.next()) {
+                    r = new Reserva(Conj_Registros.getString("Franja.inicioHora"), Conj_Registros.getString("Franja.finHora"), Conj_Registros.getString("Reserva.Reservado"));
+                    franjasBD.add(r);
+                }
+            } catch (SQLException ex) {
+            }
+
+        }
+
+        return franjasBD;
+    }
+     */
+    public static LinkedList obtenerReservasFecha(String fecha, int codAula) {
+        LinkedList franjasBD = new LinkedList<>();
+        Reserva r = null;
+
+        try {
+            String sentencia = "SELECT * FROM Reserva WHERE fecha = '" + fecha + "' and codAula = '" + codAula + "'";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new Reserva(Conj_Registros.getString("Franja.inicioHora"), Conj_Registros.getString("Franja.finHora"), Conj_Registros.getString("Reserva.Reservado"));
+                franjasBD.add(r);
+            }
+        } catch (SQLException ex) {
+        }
+
+        return franjasBD;
+    }
+
+    /*
+    public static Reserva obtenerReservasFecha(String fecha, int codAula, int codFranja) {
+
+        Reserva r = null;
+
+        try {
+            String sentencia = "SELECT Franja.inicioHora, Franja.finHora, Reserva.Reservado FROM Franja, Reserva WHERE Reserva.codAula = '" + codAula + "' and Reserva.fecha = '" + fecha + "' and Franja.codFranja = '" + codFranja + "'";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new Reserva(Conj_Registros.getString("horaInicio"), Conj_Registros.getString("horaFin"), Conj_Registros.getString("Reservado"));
+            }
+        } catch (SQLException ex) {
+        }
+
+        return r;
+    }
+     */
     //----------------------------------------------------------
     public void Modificar_Nombre(String tabla, String correo, String nombre) throws SQLException {
         String Sentencia = "UPDATE " + tabla + " SET nombre = '" + nombre + "' WHERE correo = '" + correo + "'";
@@ -181,12 +249,12 @@ public class ConexionEstatica {
         String Sentencia = "UPDATE " + tabla + " SET descripcion = '" + desc + "' WHERE codAula = '" + codAula + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
     }
-    
+
     public void Modificar_Inicio_Franja(String tabla, int codFranja, String hora) throws SQLException {
         String Sentencia = "UPDATE " + tabla + " SET inicioHOra = '" + hora + "' WHERE codFranja = '" + codFranja + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
     }
-    
+
     public void Modificar_Fin_Franja(String tabla, int codFranja, String hora) throws SQLException {
         String Sentencia = "UPDATE " + tabla + " SET finHOra = '" + hora + "' WHERE codFranja = '" + codFranja + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
@@ -197,17 +265,17 @@ public class ConexionEstatica {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Insertar_Rol_Usuario(String tabla, int codRol, String profesor) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codRol + "', '" + profesor + "');";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Insertar_Aula(String tabla, int codAula, String desc) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codAula + "', '" + desc + "');";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Insertar_Reserva(String tabla, int codAula, int codFranja, String profesor, String fecha) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codAula + "', '" + codFranja + "', '" + profesor + "', '" + fecha + "');";
         Sentencia_SQL.execute(Sentencia);
@@ -218,7 +286,7 @@ public class ConexionEstatica {
         String Sentencia = "DELETE FROM " + tabla + " WHERE correo = '" + correo + "'";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Borrar_Aula(String tabla, int codAula) throws SQLException {
         String Sentencia = "DELETE FROM " + tabla + " WHERE codAula = '" + codAula + "'";
         Sentencia_SQL.execute(Sentencia);
@@ -241,7 +309,7 @@ public class ConexionEstatica {
         }
         return asig;//Si devolvemos null el usuario no existe.
     }
-    
+
     public Rol Consultar_Rol(int codRol) throws SQLException {
         Rol rol = null;
 
@@ -257,6 +325,6 @@ public class ConexionEstatica {
             System.out.println("Error en el acceso a la BD.");
         }
         return rol;//Si devolvemos null el usuario no existe.
-    }    
+    }
 
 }

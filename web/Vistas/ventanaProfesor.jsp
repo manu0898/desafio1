@@ -4,6 +4,7 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Reserva"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="Modelo.Franja"%>
@@ -21,8 +22,7 @@
 
         <%
 
-            LinkedList<Aula> aulas = (LinkedList) session.getAttribute("aulas");
-            LinkedList<Franja> franjas = (LinkedList) session.getAttribute("franjas");
+            LinkedList<Aula> aulas = (LinkedList) session.getAttribute("aulas");    
             
         %>
 
@@ -49,30 +49,8 @@
             <input type="submit" name="verCuadrante" value="Ver cuadrante"><br><br>
         </form>
 
-        <input type="text" name ="hCom" value='Hora comienzo' readonly>
-        <input type="text" name ="hFin" value='Hora final' readonly>
-        <input type="text" name ="res" value='Reservado' readonly><br><br>
-                
-        <%                    
-            for (Franja paux2 : franjas) {
-        %>
-
-        <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-            <input type="text" name ="codFranja" value='<%= paux2.getCodFranja()%>' readonly>
-            <input type="text" name ="hInicio" value='<%= paux2.getInicioHora()%>'>
-            <input type="text" name ="hFin" value='<%= paux2.getFinHora()%>'>
-
-            <input type="submit" name="modifCRUDFranja" value="Modificar">
-        </form>
-
-        <%
-
-            }
-
-        %>
-
         <form name="form3" action="../Controladores/controlador.jsp" method="POST">
-            <input type="submit" name="volver" value="Volver"/>
+            <br><br><input type="submit" name="volver" value="Volver"/>
             <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
         </form>
 

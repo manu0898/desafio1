@@ -4,6 +4,7 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Reserva"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="Auxiliar.Codificar"%>
@@ -51,9 +52,6 @@
 
                     LinkedList aulas = ConexionEstatica.obtenerAulas();
                     session.setAttribute("aulas", aulas);
-
-                    LinkedList franjas = ConexionEstatica.obtenerFranjasHorarias();
-                    session.setAttribute("franjas", franjas);
 
                     ConexionEstatica.cerrarBD();
 
@@ -176,23 +174,28 @@
 
         ConexionEstatica con = new ConexionEstatica();
 
-        /*
-        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
-        String parameter = request.getParameter("fechaR");
-        Date date = in.parse(parameter);
-
-        con.Insertar_Reserva("Reserva", 103, 1, "b@gmail.com", date);
-         */
-        
-        Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
-        String correo = u.getCorreo();
-        
+        //Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
+        //String correo = u.getCorreo();
         String fecha = request.getParameter("fechaR");
-        con.Insertar_Reserva("Reserva", 103, 1, correo, fecha);
+        int codAula = Integer.parseInt(request.getParameter("eligeAula"));
+
+        session.setAttribute("fechaRes", fecha);
+        session.setAttribute("aulaRes", codAula);
+
+        LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
         
+        /*
+        LinkedList<Reserva> reservas = new LinkedList<>();
+        for (int i = 1; i < 7; i++) {
+            Reserva r = ConexionEstatica.obtenerReservasFecha(fecha, codAula, i);
+            reservas.add(r);
+        }
+        */
+        session.setAttribute("reservasHoras", reservas);
+
         ConexionEstatica.cerrarBD();
 
-        response.sendRedirect("../Vistas/ventanaProfesor.jsp");
+        response.sendRedirect("../Vistas/ventanaRealizarReserva.jsp");
     }
 
     //-------------------------------------------

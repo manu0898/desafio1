@@ -19,36 +19,7 @@
 
     <body>
 
-        <%
-
-            LinkedList<Aula> aulas = (LinkedList) session.getAttribute("aulasParaReserva");
-            LinkedList<Franja> franjas = (LinkedList) session.getAttribute("franjasParaReserva");
-            LinkedList<Fecha> fechas = (LinkedList) session.getAttribute("fechasParaReserva");
-
-            out.print("Aulas: ");
-            out.print(aulas);
-            out.print("\nFranjas: ");
-            out.print(franjas);
-            out.print("\nFechas: ");
-            out.print(fechas);
-
-            for (Aula paux : aulas) {
-                for (Franja paux2 : franjas) {
-                    for (Fecha paux3 : fechas) {
-
-                        ConexionEstatica.nueva();
-                        ConexionEstatica con = new ConexionEstatica();
-
-                        con.Insertar_Aula_Reservas(paux.getCodAula(), paux2.getCodFranja(), "", "Libre", paux3.getFecha());
-
-                        ConexionEstatica.cerrarBD();
-
-                    }
-                }
-
-            }
-
-        %>
+        
 
     </body>
 </html>

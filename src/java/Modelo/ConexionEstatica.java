@@ -167,7 +167,7 @@ public class ConexionEstatica {
         }
         return franjasBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -220,10 +220,14 @@ public class ConexionEstatica {
         Reserva r = null;
 
         try {
-            String sentencia = "SELECT * FROM Reserva WHERE fecha = '" + fecha + "' and codAula = '" + codAula + "'";
+            String sentencia = "SELECT f.inicioHora, f.finHora, r.Reservado \n"
+                    + "FROM Reserva as r left JOIN Franja as f ON \n"
+                    + "(r.codFranja = f.codFranja)\n"
+                    + "WHERE \n"
+                    + "r.codAula = '" + codAula + "' and r.fecha = '" + fecha + "'";
             ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
             while (Conj_Registros.next()) {
-                r = new Reserva(Conj_Registros.getString("Franja.inicioHora"), Conj_Registros.getString("Franja.finHora"), Conj_Registros.getString("Reserva.Reservado"));
+                r = new Reserva(Conj_Registros.getString("f.inicioHora"), Conj_Registros.getString("f.finHora"), Conj_Registros.getString("r.Reservado"));
                 franjasBD.add(r);
             }
         } catch (SQLException ex) {
@@ -232,23 +236,6 @@ public class ConexionEstatica {
         return franjasBD;
     }
 
-    /*
-    public static Reserva obtenerReservasFecha(String fecha, int codAula, int codFranja) {
-
-        Reserva r = null;
-
-        try {
-            String sentencia = "SELECT Franja.inicioHora, Franja.finHora, Reserva.Reservado FROM Franja, Reserva WHERE Reserva.codAula = '" + codAula + "' and Reserva.fecha = '" + fecha + "' and Franja.codFranja = '" + codFranja + "'";
-            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
-            while (Conj_Registros.next()) {
-                r = new Reserva(Conj_Registros.getString("horaInicio"), Conj_Registros.getString("horaFin"), Conj_Registros.getString("Reservado"));
-            }
-        } catch (SQLException ex) {
-        }
-
-        return r;
-    }
-     */
     //----------------------------------------------------------
     public void Modificar_Nombre(String tabla, String correo, String nombre) throws SQLException {
         String Sentencia = "UPDATE " + tabla + " SET nombre = '" + nombre + "' WHERE correo = '" + correo + "'";
@@ -280,6 +267,14 @@ public class ConexionEstatica {
         Sentencia_SQL.executeUpdate(Sentencia);
     }
 
+    public void Modificar_Reserva(String profesor, String fecha, int codAula, String inicioHora) throws SQLException {
+        String Sentencia = "UPDATE Reserva SET profesor = '" + profesor +"', Reservado = 'Reservado' \n"
+                + "WHERE fecha = '" + fecha +"' AND\n"
+                + "codAula = '" + codAula + "' AND\n"
+                + "codFranja = (SELECT codFranja FROM Franja WHERE inicioHora = '" + inicioHora + "')";
+        Sentencia_SQL.executeUpdate(Sentencia);
+    }
+
     //----------------------------------------------------------
     public void Insertar_Usuario(String tabla, String correo, String contra, String nombre, String apellido, int edad, String foto) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
@@ -300,7 +295,7 @@ public class ConexionEstatica {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codAula + "', '" + codFranja + "', '" + profesor + "', '" + fecha + "');";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Insertar_Aula_Reservas(int codAula, int codFranja, String profesor, String reservado, String fecha) throws SQLException {
         String Sentencia = "INSERT INTO Reserva (`codAula`, `codFranja`, `profesor`, `fecha`, `Reservado`) VALUES ('" + codAula + "', '" + codFranja + "', '" + profesor + "', '" + fecha + "', '" + reservado + "');";
         Sentencia_SQL.execute(Sentencia);

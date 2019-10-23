@@ -39,7 +39,6 @@
             session.setAttribute("usuarioLogueado", p);
 
             LinkedList usuarios = ConexionEstatica.obtenerPersonas();
-
             session.setAttribute("usuarios", usuarios);
 
             AsignarRol asig = con.Consultar_AsignarRol(correo);
@@ -191,14 +190,6 @@
         session.setAttribute("aulaRes", codAula);
 
         LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
-
-        /*
-        LinkedList<Reserva> reservas = new LinkedList<>();
-        for (int i = 1; i < 7; i++) {
-            Reserva r = ConexionEstatica.obtenerReservasFecha(fecha, codAula, i);
-            reservas.add(r);
-        }
-         */
         session.setAttribute("reservasHoras", reservas);
 
         ConexionEstatica.cerrarBD();
@@ -427,6 +418,33 @@
     //-------------------------------------------
     if (request.getParameter("cerrarSesion") != null) {
 
+    }
+    
+    //------------------------------------------
+    if (request.getParameter("reservarAulaUsu") != null) {
+        
+        ConexionEstatica.nueva();
+        
+        ConexionEstatica con = new ConexionEstatica();
+        
+        
+        Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
+        
+        String profesor = u.getCorreo();
+        String fecha = (String) session.getAttribute("fechaResVentana");
+        String codAulaA = (String) session.getAttribute("aulaResVentana");
+        int codAula = Integer.parseInt(codAulaA);
+        String inicioHora = request.getParameter("hInicio");
+
+        con.Modificar_Reserva(profesor, fecha, codAula, inicioHora);
+        
+        LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
+        session.setAttribute("reservasHoras", reservas);
+        
+        response.sendRedirect("../Vistas/ventanaRealizarReserva.jsp");
+        
+        ConexionEstatica.cerrarBD();
+        
     }
 
 %>

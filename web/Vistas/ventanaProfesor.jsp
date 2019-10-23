@@ -47,9 +47,7 @@
             </select><br><br>
 
             <input type="submit" name="verCuadrante" value="Ver cuadrante"><br><br>
-        </form>
-
-        <form name="form3" action="../Controladores/controlador.jsp" method="POST">
+        
             <br><br><input type="submit" name="volver" value="Volver"/>
             <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
         </form>

@@ -167,6 +167,26 @@ public class ConexionEstatica {
         }
         return franjasBD;
     }
+    
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    public static LinkedList obtenerFechas() {
+        LinkedList fechasBD = new LinkedList<>();
+        Fecha f = null;
+        try {
+            String sentencia = "SELECT * FROM Fecha";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                f = new Fecha(Conj_Registros.getInt("codFecha"), Conj_Registros.getString("fecha"));
+                fechasBD.add(f);
+            }
+        } catch (SQLException ex) {
+        }
+        return fechasBD;
+    }
 
     /**
      * Usando una LinkedList.
@@ -278,6 +298,11 @@ public class ConexionEstatica {
 
     public void Insertar_Reserva(String tabla, int codAula, int codFranja, String profesor, String fecha) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codAula + "', '" + codFranja + "', '" + profesor + "', '" + fecha + "');";
+        Sentencia_SQL.execute(Sentencia);
+    }
+    
+    public void Insertar_Aula_Reservas(int codAula, int codFranja, String profesor, String reservado, String fecha) throws SQLException {
+        String Sentencia = "INSERT INTO Reserva (`codAula`, `codFranja`, `profesor`, `fecha`, `Reservado`) VALUES ('" + codAula + "', '" + codFranja + "', '" + profesor + "', '" + fecha + "', '" + reservado + "');";
         Sentencia_SQL.execute(Sentencia);
     }
 

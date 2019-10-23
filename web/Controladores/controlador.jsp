@@ -4,6 +4,8 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Franja"%>
+<%@page import="Modelo.Aula"%>
 <%@page import="Modelo.Reserva"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -148,7 +150,6 @@
                         //recargar la pagina
                         LinkedList usuarios = ConexionEstatica.obtenerPersonas();
                         session.setAttribute("usuarios", usuarios);
-
                         ConexionEstatica.cerrarBD();
 
                         response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
@@ -167,6 +168,13 @@
 
     }
 
+    //------------------------------------------
+    if (request.getParameter("recuperarContra") != null) {
+
+        
+        response.sendRedirect("../Vistas/ventanaRecuperarContra.jsp");
+    }
+
     //-------------------------------------------
     if (request.getParameter("verCuadrante") != null) {
 
@@ -183,14 +191,14 @@
         session.setAttribute("aulaRes", codAula);
 
         LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
-        
+
         /*
         LinkedList<Reserva> reservas = new LinkedList<>();
         for (int i = 1; i < 7; i++) {
             Reserva r = ConexionEstatica.obtenerReservasFecha(fecha, codAula, i);
             reservas.add(r);
         }
-        */
+         */
         session.setAttribute("reservasHoras", reservas);
 
         ConexionEstatica.cerrarBD();

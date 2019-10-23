@@ -13,13 +13,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reservas del usuario</title>
     </head>
-    
+
     <body>
-        
+
         <%
 
             LinkedList<Reserva> reservas = (LinkedList) session.getAttribute("reservasDelUsuario");
-            
+
         %>
 
         <br><br>
@@ -28,14 +28,15 @@
         <input type="text" name ="hFin" value='Código de franja' readonly>
         <input type="text" name ="res" value='Fecha de la reserva' readonly><br><br>
 
-        <%
+        <%            
             for (Reserva paux : reservas) {
         %>
 
         <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-            <input type="text" name ="codAula" value='<%= paux.getCodAula()%>' readonly>
-            <input type="text" name ="codFranja" value='<%= paux.getCodFranja()%>' readonly>
-            <input type="text" name ="fecha" value='<%= paux.getFecha()%>' readonly>
+            <input type="text" name ="codAulaR" value='<%= paux.getCodAula()%>' readonly>
+            <input type="text" name ="codFranjaR" value='<%= paux.getCodFranja()%>' readonly>
+            <input type="text" name ="fechaR" value='<%= paux.getFecha()%>' readonly>
+            <input type="submit" name="elimReserva" value="Eliminar reserva">
         </form>
 
         <%
@@ -50,6 +51,6 @@
             <br><br><input type="submit" name="volverReserva" value="Volver">
 
         </form>
-        
+
     </body>
 </html>

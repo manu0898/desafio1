@@ -311,6 +311,11 @@ public class ConexionEstatica {
         String Sentencia = "DELETE FROM " + tabla + " WHERE codAula = '" + codAula + "'";
         Sentencia_SQL.execute(Sentencia);
     }
+    
+    public void Borrar_Reserva(int codAula, int codFranja, String profesor, String fecha) throws SQLException {
+        String Sentencia = "DELETE FROM Reserva WHERE codAula = '" + codAula + "' AND codFranja = '" + codFranja + "' AND profesor = '" + profesor + "' AND fecha = '" + fecha + "'";
+        Sentencia_SQL.execute(Sentencia);
+    }
 
     //----------------------------------------------------------
     public AsignarRol Consultar_AsignarRol(String correo) throws SQLException {

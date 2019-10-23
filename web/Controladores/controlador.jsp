@@ -417,7 +417,9 @@
 
     //-------------------------------------------
     if (request.getParameter("cerrarSesion") != null) {
-
+        session.invalidate();
+        
+        response.sendRedirect("../index.html");
     }
     
     //------------------------------------------
@@ -477,6 +479,31 @@
         session.setAttribute("franjasDetalle", franjas);
         
         response.sendRedirect("../Vistas/ventanaDetalles.jsp");
+        
+        ConexionEstatica.cerrarBD();
+        
+    }
+    
+    //----------------------------------------
+    if (request.getParameter("elimReserva") != null) {
+        
+        ConexionEstatica.nueva();
+        
+        ConexionEstatica con = new ConexionEstatica();
+        
+        Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
+        
+        String profesor = u.getCorreo();
+        int codAula = Integer.parseInt(request.getParameter("codAulaR"));
+        int codFranja = Integer.parseInt(request.getParameter("codFranjaR"));
+        String fecha = request.getParameter("fechaR");
+        
+        con.Borrar_Reserva(codAula, codFranja, profesor, fecha);
+        
+        LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
+        session.setAttribute("reservasDelUsuario", reservas);
+        
+        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
         
         ConexionEstatica.cerrarBD();
         

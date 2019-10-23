@@ -193,28 +193,6 @@ public class ConexionEstatica {
      *
      * @return
      */
-    /*
-    public static LinkedList obtenerReservasFecha(String fecha, int codAula) {
-        LinkedList franjasBD = new LinkedList<>();
-        Reserva r = null;
-
-        for (int i = 1; i < 7; i++) {
-
-            try {
-                String sentencia = "SELECT Franja.inicioHora, Franja.finHora, Reserva.Reservado FROM Franja, Reserva WHERE Reserva.codAula = '" + codAula + "' and Reserva.fecha = '" + fecha + "' and Franja.codFranja = '" + i +"'";
-                ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
-                while (Conj_Registros.next()) {
-                    r = new Reserva(Conj_Registros.getString("Franja.inicioHora"), Conj_Registros.getString("Franja.finHora"), Conj_Registros.getString("Reserva.Reservado"));
-                    franjasBD.add(r);
-                }
-            } catch (SQLException ex) {
-            }
-
-        }
-
-        return franjasBD;
-    }
-     */
     public static LinkedList obtenerReservasFecha(String fecha, int codAula) {
         LinkedList franjasBD = new LinkedList<>();
         Reserva r = null;
@@ -228,6 +206,28 @@ public class ConexionEstatica {
             ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
             while (Conj_Registros.next()) {
                 r = new Reserva(Conj_Registros.getString("f.inicioHora"), Conj_Registros.getString("f.finHora"), Conj_Registros.getString("r.Reservado"));
+                franjasBD.add(r);
+            }
+        } catch (SQLException ex) {
+        }
+
+        return franjasBD;
+    }
+    
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    public static LinkedList obtenerReservasUsuario(String profesor) {
+        LinkedList franjasBD = new LinkedList<>();
+        Reserva r = null;
+
+        try {
+            String sentencia = "SELECT * FROM Reserva WHERE profesor = '" + profesor + "'";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new Reserva(Conj_Registros.getInt("codAula"), Conj_Registros.getInt("codFranja"), Conj_Registros.getString("fecha"));
                 franjasBD.add(r);
             }
         } catch (SQLException ex) {

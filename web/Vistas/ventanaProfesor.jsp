@@ -47,6 +47,7 @@
             </select><br><br>
 
             <input type="submit" name="verCuadrante" value="Ver cuadrante"><br><br>
+            <input type="submit" name="verMisReservas" value="Ver mis reservas"><br><br>
         
             <br><br><input type="submit" name="volver" value="Volver"/>
             <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>

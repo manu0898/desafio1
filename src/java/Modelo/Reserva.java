@@ -35,6 +35,12 @@ public class Reserva {
         this.horaFin = horaFin;
         this.reservado = reservado;
     }
+    
+    public Reserva(int codAula, int codFranja, String fecha) {
+        this.codAula = codAula;
+        this.codFranja = codFranja;
+        this.fecha = fecha;
+    }
 
     public Reserva() {
     }

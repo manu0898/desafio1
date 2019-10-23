@@ -446,5 +446,40 @@
         ConexionEstatica.cerrarBD();
         
     }
+    
+    //----------------------------------------
+    if (request.getParameter("verMisReservas") != null) {
+        
+        ConexionEstatica.nueva();
+        
+        Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
+        
+        String profesor = u.getCorreo();
+        
+        LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
+        session.setAttribute("reservasDelUsuario", reservas);
+        
+        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
+        
+        ConexionEstatica.cerrarBD();
+        
+    }
+    
+    //----------------------------------------
+    if (request.getParameter("mostrarDetalles") != null) {
+        
+        ConexionEstatica.nueva();
+        
+        LinkedList aulas = ConexionEstatica.obtenerAulas();
+        session.setAttribute("aulasDetalle", aulas);
+        
+        LinkedList franjas = ConexionEstatica.obtenerFranjasHorarias();
+        session.setAttribute("franjasDetalle", franjas);
+        
+        response.sendRedirect("../Vistas/ventanaDetalles.jsp");
+        
+        ConexionEstatica.cerrarBD();
+        
+    }
 
 %>

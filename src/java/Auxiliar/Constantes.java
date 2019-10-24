@@ -14,4 +14,6 @@ public class Constantes {
     public static String usuario="manuel";
     public static String password="Chubaca2019";
     public static String ficheroBitacora="bitacora.txt";
+    
+    public static String rutaServidor = "/home/daw209/Escritorio/Desafio1/web/Perfiles/";
 }

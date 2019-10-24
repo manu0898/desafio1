@@ -22,7 +22,7 @@
             Edad <input type="number" name="edadReg" value="0"/><br><br>
             Contraseña <input type="password" name="contraReg"><br><br>
             Repetir contraseña <input type="password" name="contra2Reg"><br><br>
-            Foto <input type="text" name="fotoReg" readonly><br><br>
+            Foto <input type="file" name="fichero"/><br><br>
 
             <input type="submit" name="registrar" value="Aceptar"/>
             <input type="submit" name="volver" value="Volver"/>

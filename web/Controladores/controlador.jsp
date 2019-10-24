@@ -4,6 +4,13 @@
     Author     : daw209
 --%>
 
+<%@page import="java.io.File"%>
+<%@page import="Auxiliar.Constantes"%>
+<%@page import="org.apache.commons.fileupload.FileItem"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@page import="org.apache.commons.fileupload.FileItemFactory"%>
 <%@page import="Modelo.Franja"%>
 <%@page import="Modelo.Aula"%>
 <%@page import="Modelo.Reserva"%>
@@ -59,12 +66,10 @@
                     response.sendRedirect("../Vistas/ventanaProfesor.jsp");
                 } else {
                     if (rol.getCodRol() == 1) {
-                        Bitacora.escribirBitacora("El usuario " + p.getNombre() + " ha entrado en la ventana del administrador de aulas.");
-                        response.sendRedirect("../Vistas/ventanaAdminAula.jsp");
+                        response.sendRedirect("../Vistas/ventanaRolAdminAula.jsp");
                     } else {
                         if (rol.getCodRol() == 2) {
-                            Bitacora.escribirBitacora("El usuario " + p.getNombre() + " ha entrado en la ventana del administrador general.");
-                            response.sendRedirect("../Vistas/ventanaAdminGeneral.jsp");
+                            response.sendRedirect("../Vistas/ventanaRolAdminGeneral.jsp");
                         }
                     }
                 }
@@ -123,17 +128,43 @@
         // lo de la foto hay que cambiarlo
         String foto = "";
 
+        //LA FOTO
+        /*
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        File fichero;
+        FileItem uploaded;
+        
+        List items = upload.parseRequest(request);
+        
+        for (Object item : items) {
+            
+                uploaded = (FileItem) item;
+                
+                if (!uploaded.isFormField()) {
+                    fichero = new File(Constantes.rutaServidor, uploaded.getName()); //El archivo se guardará en 'glassfish5/glassfish/domains/domain1/config/perfiles'.
+                    uploaded.write(fichero);
+                    out.println("Archivo '" + uploaded.getName() + "' subido correctamente.");
+                } else {
+                    String key = uploaded.getFieldName();
+                    String valor = uploaded.getString();
+                    out.println("Valor recuperado con uploaded: " + key + " = " + valor + "</br>");
+                    out.println("Valor recuperado directamente del request: " + request.getParameter(key) + "</br>"); 
+                }
+            }
+         */
+        //-------------------
         if (nombre != null && email != null && contra != "" && contra2 != "" && apellido != null && contra.equals(contra2)) {
             ConexionEstatica.nueva();
             Usuario p = ConexionEstatica.existeUsuario(email);
 
             if (p == null) {
 
-                //ConexionEstatica con = new ConexionEstatica();
                 String codClave = Codificar.codifica(contra);//contraseña del usuario codificada
 
                 ConexionEstatica.Insertar_Usuario("Usuario", email, codClave, nombre, apellido, edad, foto);
 
+                //ConexionEstatica.Insertar_Usuario_Foto("Usuario", email, codClave, nombre, apellido, edad, fichero);
                 ConexionEstatica.Insertar_Rol_Usuario("AsignarRol", 0, email);//de momento todos los usuarios nuevos serán asignados como profesor
 
                 String vieneAdmin = (String) session.getAttribute("vieneDeAdmin");
@@ -353,6 +384,20 @@
 
         response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
     }
+    
+    //-------------------------------------------
+    if (request.getParameter("gestionarRoles") != null) {
+
+        ConexionEstatica.nueva();
+
+        //recargar la pagina
+        LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
+        session.setAttribute("roles", roles);
+
+        ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/gestionarRoles.jsp");
+    }
 
     //-------------------------------------------
     if (request.getParameter("verBitacora") != null) {
@@ -396,6 +441,7 @@
 
         String correo = request.getParameter("correoCrud");
 
+        con.Borrar_Asignar_Rol(correo);
         con.Borrar_Usuario("Usuario", correo);
 
         //recargar la pagina
@@ -514,4 +560,75 @@
 
     }
 
+    //--------------------------------------------
+    if (request.getParameter("entrarAdminAula") != null) {
+
+        String opcion = request.getParameter("eligeRolAA");
+
+        if (opcion.equals("adminAula")) {
+            response.sendRedirect("../Vistas/ventanaAdminAula.jsp");
+        } else {
+            if (opcion.equals("profesor")) {
+
+                ConexionEstatica.nueva();
+
+                LinkedList aulas = ConexionEstatica.obtenerAulas();
+                session.setAttribute("aulas", aulas);
+
+                ConexionEstatica.cerrarBD();
+
+                response.sendRedirect("../Vistas/ventanaProfesor.jsp");
+            }
+        }
+
+    }
+    
+    //--------------------------------------------
+    if (request.getParameter("entrarAdminGen") != null) {
+
+        String opcion = request.getParameter("eligeRolAG");
+
+        if (opcion.equals("adminAula")) {
+            response.sendRedirect("../Vistas/ventanaAdminAula.jsp");
+        } else {
+            if (opcion.equals("profesor")) {
+
+                ConexionEstatica.nueva();
+
+                LinkedList aulas = ConexionEstatica.obtenerAulas();
+                session.setAttribute("aulas", aulas);
+
+                ConexionEstatica.cerrarBD();
+
+                response.sendRedirect("../Vistas/ventanaProfesor.jsp");
+            } else {
+                if (opcion.equals("adminGeneral")) {
+                    response.sendRedirect("../Vistas/ventanaAdminGeneral.jsp");
+                }
+            }
+        }
+
+    }
+    
+    //----------------------------------
+    if (request.getParameter("modifCRUDRol") != null) {
+        
+        ConexionEstatica.nueva();
+
+        ConexionEstatica con = new ConexionEstatica();
+
+        int codRol = Integer.parseInt(request.getParameter("codRol"));
+        String prof = request.getParameter("profRol");
+
+        con.Modificar_Aisgnar_Rol("AsignarRol", prof, codRol);
+
+        //recargar la pagina
+        LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
+        session.setAttribute("roles", roles);
+
+        ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/gestionarRoles.jsp");
+        
+    }
 %>

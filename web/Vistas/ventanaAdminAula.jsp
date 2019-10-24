@@ -14,6 +14,8 @@
     
     <body>
         
+        Bienvenido, Administrador de aulas<br><br>
+        
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
             <input type="submit" name="verVentanaCuadrante" value="Ver cuadrante"/><br><br>

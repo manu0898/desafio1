@@ -127,6 +127,46 @@ public class ConexionEstatica {
         }
         return aulasBD;
     }
+    
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    public static LinkedList obtenerRoles() {
+        LinkedList rolesBD = new LinkedList<>();
+        Rol r = null;
+        try {
+            String sentencia = "SELECT * FROM Rol";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new Rol(Conj_Registros.getInt("codRol"), Conj_Registros.getString("descripcion"));
+                rolesBD.add(r);
+            }
+        } catch (SQLException ex) {
+        }
+        return rolesBD;
+    }
+    
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    public static LinkedList obtenerAsignarRoles() {
+        LinkedList rolesBD = new LinkedList<>();
+        AsignarRol r = null;
+        try {
+            String sentencia = "SELECT * FROM AsignarRol";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new AsignarRol(Conj_Registros.getInt("codRol"), Conj_Registros.getString("profesor"));
+                rolesBD.add(r);
+            }
+        } catch (SQLException ex) {
+        }
+        return rolesBD;
+    }
 
     /**
      * Usando una LinkedList.
@@ -266,6 +306,11 @@ public class ConexionEstatica {
         String Sentencia = "UPDATE " + tabla + " SET finHOra = '" + hora + "' WHERE codFranja = '" + codFranja + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
     }
+    
+    public void Modificar_Aisgnar_Rol(String tabla, String profesor, int codRol) throws SQLException {
+        String Sentencia = "UPDATE " + tabla + " SET codRol = '" + codRol + "' WHERE profesor = '" + profesor + "'";
+        Sentencia_SQL.executeUpdate(Sentencia);
+    }
 
     public void Modificar_Reserva(String profesor, String fecha, int codAula, String inicioHora) throws SQLException {
         String Sentencia = "UPDATE Reserva SET profesor = '" + profesor +"', Reservado = 'Reservado' \n"
@@ -277,6 +322,12 @@ public class ConexionEstatica {
 
     //----------------------------------------------------------
     public static void Insertar_Usuario(String tabla, String correo, String contra, String nombre, String apellido, int edad, String foto) throws SQLException {
+        String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
+        Sentencia_SQL.execute(Sentencia);
+    }
+    
+    //----------------------------------------------------------
+    public static void Insertar_Usuario_Foto(String tabla, String correo, String contra, String nombre, String apellido, int edad, Blob foto) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
         Sentencia_SQL.execute(Sentencia);
     }
@@ -314,6 +365,11 @@ public class ConexionEstatica {
     
     public void Borrar_Reserva(int codAula, int codFranja, String profesor, String fecha) throws SQLException {
         String Sentencia = "DELETE FROM Reserva WHERE codAula = '" + codAula + "' AND codFranja = '" + codFranja + "' AND profesor = '" + profesor + "' AND fecha = '" + fecha + "'";
+        Sentencia_SQL.execute(Sentencia);
+    }
+    
+    public void Borrar_Asignar_Rol(String profesor) throws SQLException {
+        String Sentencia = "DELETE FROM AsignarRol WHERE profesor = '" + profesor + "'";
         Sentencia_SQL.execute(Sentencia);
     }
 

@@ -129,22 +129,21 @@
 
             if (p == null) {
 
-                ConexionEstatica con = new ConexionEstatica();
-
+                //ConexionEstatica con = new ConexionEstatica();
                 String codClave = Codificar.codifica(contra);//contraseña del usuario codificada
 
-                con.Insertar_Usuario("Usuario", email, codClave, nombre, apellido, edad, foto);
+                ConexionEstatica.Insertar_Usuario("Usuario", email, codClave, nombre, apellido, edad, foto);
 
-                con.Insertar_Rol_Usuario("AsignarRol", 0, email);//de momento todos los usuarios nuevos serán asignados como profesor
+                ConexionEstatica.Insertar_Rol_Usuario("AsignarRol", 0, email);//de momento todos los usuarios nuevos serán asignados como profesor
 
                 String vieneAdmin = (String) session.getAttribute("vieneDeAdmin");
+
+                Bitacora.escribirBitacora("El usuario " + nombre + " se ha registrado en el sistema.");
 
                 if (vieneAdmin.equals("no")) {
                     response.sendRedirect("../index.html");
                 } else {
                     if (vieneAdmin.equals("si")) {
-
-                        ConexionEstatica.nueva();
 
                         //recargar la pagina
                         LinkedList usuarios = ConexionEstatica.obtenerPersonas();
@@ -154,13 +153,9 @@
                         response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
                     }
                 }
-
-                Bitacora.escribirBitacora("El usuario " + p.getNombre() + " se ha registrado en el sistema.");
-
             } else {
                 out.print("Ya existe un usuario con ese email");
             }
-            ConexionEstatica.cerrarBD();
         } else {
             out.print("Revise los datos introducidos");
         }

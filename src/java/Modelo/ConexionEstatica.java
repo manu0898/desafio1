@@ -276,12 +276,12 @@ public class ConexionEstatica {
     }
 
     //----------------------------------------------------------
-    public void Insertar_Usuario(String tabla, String correo, String contra, String nombre, String apellido, int edad, String foto) throws SQLException {
+    public static void Insertar_Usuario(String tabla, String correo, String contra, String nombre, String apellido, int edad, String foto) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
         Sentencia_SQL.execute(Sentencia);
     }
 
-    public void Insertar_Rol_Usuario(String tabla, int codRol, String profesor) throws SQLException {
+    public static void Insertar_Rol_Usuario(String tabla, int codRol, String profesor) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + codRol + "', '" + profesor + "');";
         Sentencia_SQL.execute(Sentencia);
     }

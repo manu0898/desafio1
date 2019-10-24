@@ -16,7 +16,7 @@
         
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            <input type="submit" name="verCuadrante" value="Ver cuadrante"/><br><br>
+            <input type="submit" name="verVentanaCuadrante" value="Ver cuadrante"/><br><br>
             <input type="submit" name="gestionarAulas" value="Gestionar aulas"/><br><br>
             <input type="submit" name="gestionarFranjHorarias" value="Gestionar franjas horarias"/><br><br>
             <input type="submit" name="gestionarUsuarios" value="Gestionar usuarios"/><br><br>

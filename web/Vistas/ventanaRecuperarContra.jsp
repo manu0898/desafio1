@@ -19,7 +19,12 @@
 
     <body>
 
-        
+        <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
+            Correo: <input type="email" name="emailContra"/><br><br>
+
+            <input type="submit" name="enviarContra" value="Enviar"/>
+            <input type="submit" name="volverContra" value="Volver"/>
+        </form>
 
     </body>
 </html>

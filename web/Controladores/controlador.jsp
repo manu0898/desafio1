@@ -170,7 +170,6 @@
     //------------------------------------------
     if (request.getParameter("recuperarContra") != null) {
 
-        
         response.sendRedirect("../Vistas/ventanaRecuperarContra.jsp");
     }
 
@@ -181,8 +180,6 @@
 
         ConexionEstatica con = new ConexionEstatica();
 
-        //Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
-        //String correo = u.getCorreo();
         String fecha = request.getParameter("fechaR");
         int codAula = Integer.parseInt(request.getParameter("eligeAula"));
 
@@ -195,6 +192,20 @@
         ConexionEstatica.cerrarBD();
 
         response.sendRedirect("../Vistas/ventanaRealizarReserva.jsp");
+    }
+
+    //-------------------------------------------
+    if (request.getParameter("verVentanaCuadrante") != null) {
+
+        ConexionEstatica.nueva();
+
+        LinkedList aulas = ConexionEstatica.obtenerAulas();
+        session.setAttribute("aulas", aulas);
+
+        ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/ventanaProfesor.jsp");
+
     }
 
     //-------------------------------------------
@@ -418,20 +429,19 @@
     //-------------------------------------------
     if (request.getParameter("cerrarSesion") != null) {
         session.invalidate();
-        
+
         response.sendRedirect("../index.html");
     }
-    
+
     //------------------------------------------
     if (request.getParameter("reservarAulaUsu") != null) {
-        
+
         ConexionEstatica.nueva();
-        
+
         ConexionEstatica con = new ConexionEstatica();
-        
-        
+
         Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
-        
+
         String profesor = u.getCorreo();
         String fecha = (String) session.getAttribute("fechaResVentana");
         String codAulaA = (String) session.getAttribute("aulaResVentana");
@@ -439,74 +449,74 @@
         String inicioHora = request.getParameter("hInicio");
 
         con.Modificar_Reserva(profesor, fecha, codAula, inicioHora);
-        
+
         LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
         session.setAttribute("reservasHoras", reservas);
-        
+
         response.sendRedirect("../Vistas/ventanaRealizarReserva.jsp");
-        
+
         ConexionEstatica.cerrarBD();
-        
+
     }
-    
+
     //----------------------------------------
     if (request.getParameter("verMisReservas") != null) {
-        
+
         ConexionEstatica.nueva();
-        
+
         Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
-        
+
         String profesor = u.getCorreo();
-        
+
         LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
         session.setAttribute("reservasDelUsuario", reservas);
-        
+
         response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
-        
+
         ConexionEstatica.cerrarBD();
-        
+
     }
-    
+
     //----------------------------------------
     if (request.getParameter("mostrarDetalles") != null) {
-        
+
         ConexionEstatica.nueva();
-        
+
         LinkedList aulas = ConexionEstatica.obtenerAulas();
         session.setAttribute("aulasDetalle", aulas);
-        
+
         LinkedList franjas = ConexionEstatica.obtenerFranjasHorarias();
         session.setAttribute("franjasDetalle", franjas);
-        
+
         response.sendRedirect("../Vistas/ventanaDetalles.jsp");
-        
+
         ConexionEstatica.cerrarBD();
-        
+
     }
-    
+
     //----------------------------------------
     if (request.getParameter("elimReserva") != null) {
-        
+
         ConexionEstatica.nueva();
-        
+
         ConexionEstatica con = new ConexionEstatica();
-        
+
         Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
-        
+
         String profesor = u.getCorreo();
         int codAula = Integer.parseInt(request.getParameter("codAulaR"));
         int codFranja = Integer.parseInt(request.getParameter("codFranjaR"));
         String fecha = request.getParameter("fechaR");
-        
+
         con.Borrar_Reserva(codAula, codFranja, profesor, fecha);
-        
+
         LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
         session.setAttribute("reservasDelUsuario", reservas);
-        
+
         response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
-        
+
         ConexionEstatica.cerrarBD();
-        
+
     }
 
 %>

@@ -292,6 +292,27 @@ public class ConexionEstatica {
 
         return franjasBD;
     }
+    
+    public static Usuario existeUsuarioBD(String usuario) {
+        Usuario existe = null;
+        ConexionEstatica.nueva();
+        try {
+            String sentencia = "SELECT * FROM Usuario WHERE correo =? ";
+            //Preparamos la sentencia para evitar la inyección.
+            PreparedStatement sentenciaPreparada = ConexionEstatica.Conex.prepareStatement(sentencia);
+            sentenciaPreparada.setString(1, usuario);
+            ConexionEstatica.Conj_Registros = sentenciaPreparada.executeQuery();
+
+            if (ConexionEstatica.Conj_Registros.next())//Si devuelve true es que existe.
+            {
+                existe = new Usuario(Conj_Registros.getString(1), Conj_Registros.getString(2), Conj_Registros.getString(3), Conj_Registros.getInt(4), Conj_Registros.getString(4), Conj_Registros.getBytes(5), Conj_Registros.getBlob(6));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en el acceso a la BD.");
+        }
+        ConexionEstatica.cerrarBD();
+        return existe;//Si devolvemos null el usuario no existe.
+    }
 
     //----------------------------------------------------------
     public void Modificar_Nombre(String tabla, String correo, String nombre) throws SQLException {

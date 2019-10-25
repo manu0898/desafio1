@@ -100,6 +100,7 @@
             }
 
             //Usuario u = ConexionEstatica.existeUsuario(p.getCorreo());
+            
             ConexionEstatica.insertarPersona(p);
             ConexionEstatica.insertarRolPersona(p);
 
@@ -111,9 +112,13 @@
             } else {
                 if (vieneAdmin.equals("si")) {
 
+                    ConexionEstatica.nueva();
+                    
                     //recargar la pagina
                     LinkedList usuarios = ConexionEstatica.obtenerPersonas();
                     session.setAttribute("usuarios", usuarios);
+                    
+                    ConexionEstatica.cerrarBD();
 
                     response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
                 }

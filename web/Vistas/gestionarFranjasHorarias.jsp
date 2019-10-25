@@ -12,9 +12,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Gestionar franjas horarias</title>
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
     </head>
     
     <body>
+        
+        <nav>
+            <ul>
+                <li><a href="#">Profesor</a></li>
+
+                <li><a href="../Vistas/ventanaRolAdminAula.jsp">Admin aulas</a></li>
+
+                <li><a href="../Vistas/ventanaRolAdminGeneral.jsp">Admin general</a></li>
+
+                <li><a href="#">Más...</a>
+                    <ul>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
         
         <%
             

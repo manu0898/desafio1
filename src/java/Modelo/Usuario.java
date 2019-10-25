@@ -5,19 +5,25 @@
  */
 package Modelo;
 
+import java.sql.Blob;
+
 /**
  *
  * @author fernando
  */
 public class Usuario {
-    
+
     private String correo;
     private String nombre;
     private String apellido;
     private int edad;
     private String contra;
-    private String foto;
+    //private String foto;
 
+    private byte[] foto; //Foto en formato binario, será la leída del formulario.
+    private Blob fotoBlob; //Formato en formato BLOB será la leída de MySQL.
+
+    /*
     public Usuario(String correo, String nombre, String apellido, int edad, String contrasena, String foto) {
         this.correo = correo;
         this.nombre = nombre;
@@ -26,9 +32,20 @@ public class Usuario {
         this.contra = contrasena;
         this.foto = foto;
     }
+     */
+    
+    public Usuario(String correo, String nombre, String apellido, int edad, String contrasena, byte[] foto, Blob fotoBlob) {
+        this.correo = correo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.contra = contrasena;
+        this.foto = foto;
+        this.fotoBlob = fotoBlob;
+    }
 
     public Usuario() {
-        
+
     }
 
     public String getCorreo() {
@@ -71,6 +88,7 @@ public class Usuario {
         this.contra = contra;
     }
 
+    /*
     public String getFoto() {
         return foto;
     }
@@ -78,5 +96,22 @@ public class Usuario {
     public void setFoto(String foto) {
         this.foto = foto;
     }
-    
+    */
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
+
+    public Blob getFotoBlob() {
+        return fotoBlob;
+    }
+
+    public void setFotoBlob(Blob fotoBlob) {
+        this.fotoBlob = fotoBlob;
+    }
+
 }

@@ -4,6 +4,8 @@
     Author     : daw209
 --%>
 
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.FileInputStream"%>
 <%@page import="java.io.File"%>
 <%@page import="Auxiliar.Constantes"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
@@ -112,83 +114,6 @@
                 response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
 
             }
-        }
-
-    }
-
-    //------------------------------------------
-    if (request.getParameter("registrar") != null) {
-
-        String nombre = request.getParameter("nombreReg");
-        String apellido = request.getParameter("apellidoReg");
-        String email = request.getParameter("correoReg");
-        int edad = Integer.parseInt(request.getParameter("edadReg"));
-        String contra = request.getParameter("contraReg");
-        String contra2 = request.getParameter("contra2Reg");
-        // lo de la foto hay que cambiarlo
-        String foto = "";
-
-        //LA FOTO
-        /*
-        FileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        File fichero;
-        FileItem uploaded;
-        
-        List items = upload.parseRequest(request);
-        
-        for (Object item : items) {
-            
-                uploaded = (FileItem) item;
-                
-                if (!uploaded.isFormField()) {
-                    fichero = new File(Constantes.rutaServidor, uploaded.getName()); //El archivo se guardará en 'glassfish5/glassfish/domains/domain1/config/perfiles'.
-                    uploaded.write(fichero);
-                    out.println("Archivo '" + uploaded.getName() + "' subido correctamente.");
-                } else {
-                    String key = uploaded.getFieldName();
-                    String valor = uploaded.getString();
-                    out.println("Valor recuperado con uploaded: " + key + " = " + valor + "</br>");
-                    out.println("Valor recuperado directamente del request: " + request.getParameter(key) + "</br>"); 
-                }
-            }
-         */
-        //-------------------
-        if (nombre != null && email != null && contra != "" && contra2 != "" && apellido != null && contra.equals(contra2)) {
-            ConexionEstatica.nueva();
-            Usuario p = ConexionEstatica.existeUsuario(email);
-
-            if (p == null) {
-
-                String codClave = Codificar.codifica(contra);//contraseña del usuario codificada
-
-                ConexionEstatica.Insertar_Usuario("Usuario", email, codClave, nombre, apellido, edad, foto);
-
-                //ConexionEstatica.Insertar_Usuario_Foto("Usuario", email, codClave, nombre, apellido, edad, fichero);
-                ConexionEstatica.Insertar_Rol_Usuario("AsignarRol", 0, email);//de momento todos los usuarios nuevos serán asignados como profesor
-
-                String vieneAdmin = (String) session.getAttribute("vieneDeAdmin");
-
-                Bitacora.escribirBitacora("El usuario " + nombre + " se ha registrado en el sistema.");
-
-                if (vieneAdmin.equals("no")) {
-                    response.sendRedirect("../index.html");
-                } else {
-                    if (vieneAdmin.equals("si")) {
-
-                        //recargar la pagina
-                        LinkedList usuarios = ConexionEstatica.obtenerPersonas();
-                        session.setAttribute("usuarios", usuarios);
-                        ConexionEstatica.cerrarBD();
-
-                        response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
-                    }
-                }
-            } else {
-                out.print("Ya existe un usuario con ese email");
-            }
-        } else {
-            out.print("Revise los datos introducidos");
         }
 
     }
@@ -384,7 +309,7 @@
 
         response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
     }
-    
+
     //-------------------------------------------
     if (request.getParameter("gestionarRoles") != null) {
 
@@ -582,7 +507,7 @@
         }
 
     }
-    
+
     //--------------------------------------------
     if (request.getParameter("entrarAdminGen") != null) {
 
@@ -609,10 +534,10 @@
         }
 
     }
-    
+
     //----------------------------------
     if (request.getParameter("modifCRUDRol") != null) {
-        
+
         ConexionEstatica.nueva();
 
         ConexionEstatica con = new ConexionEstatica();
@@ -629,6 +554,6 @@
         ConexionEstatica.cerrarBD();
 
         response.sendRedirect("../Vistas/gestionarRoles.jsp");
-        
+
     }
 %>

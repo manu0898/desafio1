@@ -11,10 +11,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro</title>
     </head>
-    
+
     <body>
-        
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
+
+        <form name="form" enctype="multipart/form-data" action="../Controladores/subefichero.jsp" method="POST">
 
             Correo <input type="email" name="correoReg"><br><br>
             Nombre <input type="text" name="nombreReg"><br><br>
@@ -25,9 +25,11 @@
             Foto <input type="file" name="fichero"/><br><br>
 
             <input type="submit" name="registrar" value="Aceptar"/>
-            <input type="submit" name="volver" value="Volver"/>
-
         </form>
         
+        <form name="form2" action="../Controladores/controlador.jsp" method="POST">
+            <input type="submit" name="volver" value="Volver"/>
+        </form>
+
     </body>
 </html>

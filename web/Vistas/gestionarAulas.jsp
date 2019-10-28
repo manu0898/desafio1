@@ -26,9 +26,9 @@
         %>
         <nav>
             <ul>
-                <li><a class="active" href="../Vistas/ventanaAdminAula.jsp">Principal</a></li>
+                <li><a href="../Vistas/ventanaAdminAula.jsp">Principal</a></li>
                 <li><a href="../Vistas/ventanaRolAdminAula.jsp">Cambiar rol</a></li>
-                <li><a href="../Vistas/gestionarAulas.jsp">Gestionar aulas</a></li>
+                <li><a class="active" href="../Vistas/gestionarAulas.jsp">Gestionar aulas</a></li>
                 <li><a href="../Vistas/gestionarFranjasHorarias.jsp">Gestionar franjas horarias</a></li>
                 <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
             </ul>

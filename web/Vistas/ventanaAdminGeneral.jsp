@@ -20,6 +20,7 @@
             
             <input type="submit" name="gestionarUsuarios" value="Gestionar usuarios"/><br><br>
             <input type="submit" name="gestionarRoles" value="Gestionar roles"/><br><br>
+            <input type="submit" name="verReservas" value="Ver reservas"/><br><br>
             <input type="submit" name="verBitacora" value="Ver bitácora"/>
 
         </form>

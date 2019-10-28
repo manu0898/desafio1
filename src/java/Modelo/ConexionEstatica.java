@@ -337,6 +337,28 @@ public class ConexionEstatica {
         
         return rol;
     }
+    
+    /**
+     * Usando una LinkedList.
+     *
+     * @return
+     */
+    public static LinkedList obtenerTodasLasReservas() {
+        LinkedList franjasBD = new LinkedList<>();
+        Reserva r = null;
+
+        try {
+            String sentencia = "SELECT * FROM Reserva WHERE profesor != ''";
+            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            while (Conj_Registros.next()) {
+                r = new Reserva(Conj_Registros.getInt("codAula"), Conj_Registros.getInt("codFranja"), Conj_Registros.getString("profesor"), Conj_Registros.getString("fecha"));
+                franjasBD.add(r);
+            }
+        } catch (SQLException ex) {
+        }
+
+        return franjasBD;
+    }
 
     //----------------------------------------------------------
     public void Modificar_Nombre(String tabla, String correo, String nombre) throws SQLException {

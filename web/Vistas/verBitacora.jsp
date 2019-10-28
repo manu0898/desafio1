@@ -17,12 +17,12 @@
         
         <nav>
             <ul>
-                <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                <li><a href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
                 <li><a href="../Vistas/ventanaRolAdminGeneral.jsp">Cambiar rol</a></li>
-                <li><a href="">Ver reservas</a></li>
+                <li><a href="../Vistas/ventanaVerTodasLasReservas.jsp">Ver reservas</a></li>
                 <li><a href="../Vistas/gestionarUsuarios.jsp">Gestionar usuarios</a></li>
                 <li><a href="../Vistas/gestionarRoles.jsp">Gestionar roles</a></li>
-                <li><a href="../Vistas/verBitacora.jsp">Ver bitácora</a></li>
+                <li><a class="active" href="../Vistas/verBitacora.jsp">Ver bitácora</a></li>
                 <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
             </ul>
         </nav>

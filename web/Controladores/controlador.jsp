@@ -330,6 +330,20 @@
     if (request.getParameter("verBitacora") != null) {
         response.sendRedirect("../Vistas/verBitacora.jsp");
     }
+    
+    //-------------------------------------------
+    if (request.getParameter("verReservas") != null) {
+        
+        ConexionEstatica.nueva();
+
+        //recargar la pagina
+        LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
+        session.setAttribute("todasReservas", reservas);
+
+        ConexionEstatica.cerrarBD();
+        
+        response.sendRedirect("../Vistas/ventanaVerTodasLasReservas.jsp");
+    }
 
     //--------------------
     if (request.getParameter("modifCRUDUsuarios") != null) {
@@ -536,6 +550,9 @@
 
         LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
         session.setAttribute("roles", roles);
+        
+        LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
+        session.setAttribute("todasReservas", reservas);
 
         ConexionEstatica.cerrarBD();
 
@@ -577,6 +594,31 @@
         ConexionEstatica.cerrarBD();
 
         response.sendRedirect("../Vistas/gestionarRoles.jsp");
+
+    }
+    
+    //----------------------------------------
+    if (request.getParameter("elimCRUReservas") != null) {
+
+        ConexionEstatica.nueva();
+
+        ConexionEstatica con = new ConexionEstatica();
+
+        Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
+
+        String profesor = request.getParameter("profesorCru");
+        int codAula = Integer.parseInt(request.getParameter("codAulaCru"));
+        int codFranja = Integer.parseInt(request.getParameter("codFranjaCru"));
+        String fecha = request.getParameter("fechaCru");
+
+        con.Borrar_Reserva(codAula, codFranja, profesor, fecha);
+
+        LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
+        session.setAttribute("todasReservas", reservas);
+
+        response.sendRedirect("../Vistas/ventanaVerTodasLasReservas.jsp");
+
+        ConexionEstatica.cerrarBD();
 
     }
 %>

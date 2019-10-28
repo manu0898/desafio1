@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalles</title>
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
     </head>
     
     <body>
@@ -24,6 +25,13 @@
             LinkedList<Franja> franjas = (LinkedList) session.getAttribute("franjasDetalle");
             
         %>
+        
+        <nav>
+            <ul>
+                <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
+            </ul>
+        </nav>
 
         Detalle de las aulas:<br><br>
 

@@ -4,6 +4,8 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.ConexionEstatica"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="Modelo.Franja"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,28 +19,20 @@
     
     <body>
         
-        <nav>
-            <ul>
-                <li><a href="#">Profesor</a></li>
-
-                <li><a href="../Vistas/ventanaRolAdminAula.jsp">Admin aulas</a></li>
-
-                <li><a href="../Vistas/ventanaRolAdminGeneral.jsp">Admin general</a></li>
-
-                <li><a href="#">Más...</a>
-                    <ul>
-                        <li><a href="#">Perfil</a></li>
-                        <li><a href="#">Cerrar sesión</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-        
         <%
             
             LinkedList<Franja> franjas = (LinkedList) session.getAttribute("franjas");
-
+            
         %>
+        <nav>
+            <ul>
+                <li><a class="active" href="../Vistas/ventanaAdminAula.jsp">Principal</a></li>
+                <li><a href="../Vistas/ventanaRolAdminGeneral.jsp">Cambiar rol</a></li>
+                <li><a href="../Vistas/gestionarAulas.jsp">Gestionar aulas</a></li>
+                <li><a href="../Vistas/gestionarFranjasHorarias.jsp">Gestionar franjas horarias</a></li>
+                <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
+            </ul>
+        </nav>
 
         <input type="text" name ="codigoFranja" value='Codigo franja' readonly>
         <input type="text" name ="horaInicio" value='Hora de inicio' readonly>

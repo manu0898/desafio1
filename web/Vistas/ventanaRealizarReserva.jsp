@@ -12,10 +12,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Realizar Reserva</title>
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
     </head>
 
     <body>
 
+        <nav>
+            <ul>
+                <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
+            </ul>
+        </nav>
+        
         <%
 
             LinkedList<Reserva> reservas = (LinkedList) session.getAttribute("reservasHoras");

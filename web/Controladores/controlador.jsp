@@ -64,6 +64,8 @@
                     session.setAttribute("aulas", aulas);
 
                     ConexionEstatica.cerrarBD();
+                    
+                    session.setAttribute("rolIniciaSesion", "Profesor");
 
                     response.sendRedirect("../Vistas/ventanaProfesor.jsp");
                 } else {
@@ -487,20 +489,33 @@
 
     //--------------------------------------------
     if (request.getParameter("entrarAdminAula") != null) {
+        
+        ConexionEstatica.nueva();
+
+        LinkedList aulas = ConexionEstatica.obtenerAulas();
+        session.setAttribute("aulas", aulas);
+
+        LinkedList franjas = ConexionEstatica.obtenerFranjasHorarias();
+        session.setAttribute("franjas", franjas);
+
+        ConexionEstatica.cerrarBD();
 
         String opcion = request.getParameter("eligeRolAA");
 
         if (opcion.equals("adminAula")) {
+            session.setAttribute("rolIniciaSesion", "AdminAula");
             response.sendRedirect("../Vistas/ventanaAdminAula.jsp");
         } else {
             if (opcion.equals("profesor")) {
 
                 ConexionEstatica.nueva();
 
-                LinkedList aulas = ConexionEstatica.obtenerAulas();
-                session.setAttribute("aulas", aulas);
+                LinkedList aulas2 = ConexionEstatica.obtenerAulas();
+                session.setAttribute("aulas", aulas2);
 
                 ConexionEstatica.cerrarBD();
+                
+                session.setAttribute("rolIniciaSesion", "Profesor");
 
                 response.sendRedirect("../Vistas/ventanaProfesor.jsp");
             }
@@ -511,23 +526,31 @@
     //--------------------------------------------
     if (request.getParameter("entrarAdminGen") != null) {
 
+        ConexionEstatica.nueva();
+
+        LinkedList aulas = ConexionEstatica.obtenerAulas();
+        session.setAttribute("aulas", aulas);
+
+        LinkedList franjas = ConexionEstatica.obtenerFranjasHorarias();
+        session.setAttribute("franjas", franjas);
+
+        LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
+        session.setAttribute("roles", roles);
+
+        ConexionEstatica.cerrarBD();
+
         String opcion = request.getParameter("eligeRolAG");
 
         if (opcion.equals("adminAula")) {
+            session.setAttribute("rolIniciaSesion", "AdminAula");
             response.sendRedirect("../Vistas/ventanaAdminAula.jsp");
         } else {
             if (opcion.equals("profesor")) {
-
-                ConexionEstatica.nueva();
-
-                LinkedList aulas = ConexionEstatica.obtenerAulas();
-                session.setAttribute("aulas", aulas);
-
-                ConexionEstatica.cerrarBD();
-
+                session.setAttribute("rolIniciaSesion", "Profesor");
                 response.sendRedirect("../Vistas/ventanaProfesor.jsp");
             } else {
                 if (opcion.equals("adminGeneral")) {
+                    session.setAttribute("rolIniciaSesion", "AdminGeneral");
                     response.sendRedirect("../Vistas/ventanaAdminGeneral.jsp");
                 }
             }

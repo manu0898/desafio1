@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Gestión de roles</title>
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
     </head>
 
     <body>
@@ -20,6 +21,18 @@
         <%
             LinkedList<AsignarRol> roles = (LinkedList) session.getAttribute("roles");
         %>
+        
+        <nav>
+            <ul>
+                <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                <li><a href="../Vistas/ventanaRolAdminGeneral.jsp">Cambiar rol</a></li>
+                <li><a href="">Ver reservas</a></li>
+                <li><a href="../Vistas/gestionarUsuarios.jsp">Gestionar usuarios</a></li>
+                <li><a href="../Vistas/gestionarRoles.jsp">Gestionar roles</a></li>
+                <li><a href="../Vistas/verBitacora.jsp">Ver bitácora</a></li>
+                <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
+            </ul>
+        </nav>
         
         <input type="text" name ="desc" value='Profesor' readonly>
         <input type="text" name ="cod" value='Código de rol' readonly><br><br>

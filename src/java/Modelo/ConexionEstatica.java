@@ -313,6 +313,30 @@ public class ConexionEstatica {
         ConexionEstatica.cerrarBD();
         return existe;//Si devolvemos null el usuario no existe.
     }
+    
+    public static String obtenerRolUsuario (String usuario) {
+        String rol = "";
+        
+        ConexionEstatica.nueva();
+        
+        try {
+            String sentencia = "SELECT descripcion FROM Rol WHERE codRol = (SELECT codRol FROM AsignarRol WHERE profesor = '" + usuario + "');";
+            //Preparamos la sentencia para evitar la inyección.
+            PreparedStatement sentenciaPreparada = ConexionEstatica.Conex.prepareStatement(sentencia);
+            ConexionEstatica.Conj_Registros = sentenciaPreparada.executeQuery();
+
+            if (ConexionEstatica.Conj_Registros.next())//Si devuelve true es que existe.
+            {
+                rol = Conj_Registros.getString(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en el acceso a la BD.");
+        }
+        
+        ConexionEstatica.cerrarBD();
+        
+        return rol;
+    }
 
     //----------------------------------------------------------
     public void Modificar_Nombre(String tabla, String correo, String nombre) throws SQLException {

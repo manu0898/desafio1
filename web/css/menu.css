@@ -25,7 +25,3 @@ li a:hover:not(.active) {
 .active {
   background-color: blue;
 }
-
-#contenedorPrincipal {
-    margin-top: 30px;
-}

@@ -12,65 +12,81 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Realizar Reserva</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
 
     <body>
 
-        <nav>
-            <ul>
-                <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
-                <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
-            </ul>
-        </nav>
-        
-        <%
+        <div id="menu">
+            <nav>
+                <ul>
+                    <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                    <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
+                </ul>
+            </nav>
+        </div>
 
-            LinkedList<Reserva> reservas = (LinkedList) session.getAttribute("reservasHoras");
-            
-            String fechaReserva = (String) session.getAttribute("fechaRes");
-            String aula = String.valueOf(session.getAttribute("aulaRes"));
-            int aulaA = Integer.parseInt(aula);
-            
-            session.setAttribute("fechaResVentana", fechaReserva);
-            session.setAttribute("aulaResVentana", aula);
-            
-            out.print(fechaReserva);
-        %>
-        <br>
-        <%
-            out.print(aulaA);
-        %>
+        <div id="contenedorPrincipal">
+            <%
 
-        <br><br>
+                LinkedList<Reserva> reservas = (LinkedList) session.getAttribute("reservasHoras");
 
-        <input type="text" name ="hCom" value='Hora comienzo' readonly>
-        <input type="text" name ="hFin" value='Hora final' readonly>
-        <input type="text" name ="res" value='Estado' readonly><br><br>
+                String fechaReserva = (String) session.getAttribute("fechaRes");
+                String aula = String.valueOf(session.getAttribute("aulaRes"));
+                int aulaA = Integer.parseInt(aula);
 
-        <%
-            for (Reserva paux : reservas) {
-        %>
+                session.setAttribute("fechaResVentana", fechaReserva);
+                session.setAttribute("aulaResVentana", aula);
+            %>
+            Fecha: 
+            <%
+                out.print(fechaReserva);
+            %>
+            <br>
+            Aula:
+            <%
+                out.print(aulaA);
+            %>
 
-        <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-            <input type="text" name ="hInicio" value='<%= paux.getHoraInicio()%>' readonly>
-            <input type="text" name ="hFin" value='<%= paux.getHoraFin()%>' readonly>
-            <input type="text" name ="reservado" value='<%= paux.getReservado()%>'>
+            <div id="tabla">
+                <table>
+                    <tr>
+                        <th>Hora comienzo</th>
+                        <th>Hora final</th>
+                        <th>Estado</th>
+                    </tr>
 
-            <input type="submit" name="reservarAulaUsu" value="Reservar">
-        </form>
+                    <%
+                        for (Reserva paux : reservas) {
+                    %>
 
-        <%
+                    <form name="form2" action="../Controladores/controlador.jsp" method="POST">
+                        <tr>
+                            <td><input type="text" class="elemento" name ="hInicio" value='<%= paux.getHoraInicio()%>' readonly></td>
+                            <td><input type="text" class="elemento" name ="hFin" value='<%= paux.getHoraFin()%>' readonly></td>
+                            <td><input type="text" class="elemento" name ="reservado" value='<%= paux.getReservado()%>'></td>
 
-            }
+                            <td><input type="submit" class="elemento" name="reservarAulaUsu" value="Reservar"></td>
+                        </tr>
+                    </form>
 
-        %>
+                    <%
 
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
+                        }
 
-            <br><br><input type="submit" name="volverReserva" value="Volver">
+                    %>
 
-        </form>
+                </table>
+            </div>
 
+            <div id="botones">
+                <form name="form" action="../Controladores/controlador.jsp" method="POST">
+                    <input type="submit" class="elemento" name="volverReserva" value="Volver">
+                </form>
+            </div>
+
+        </div>
     </body>
 </html>

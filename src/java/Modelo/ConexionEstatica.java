@@ -60,16 +60,22 @@ public class ConexionEstatica {
 
     public static Usuario existeUsuario(String correo) {
         Usuario existe = null;
+        ConexionEstatica.nueva();
         try {
-            String sentencia = "SELECT * FROM Usuario WHERE correo = '" + correo + "'";
-            ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
+            String sentencia = "SELECT * FROM Usuario WHERE correo =? ";
+            //Preparamos la sentencia para evitar la inyección.
+            PreparedStatement sentenciaPreparada = ConexionEstatica.Conex.prepareStatement(sentencia);
+            sentenciaPreparada.setString(1, correo);
+            ConexionEstatica.Conj_Registros = sentenciaPreparada.executeQuery();
+
             if (ConexionEstatica.Conj_Registros.next())//Si devuelve true es que existe.
             {
-                existe = new Usuario(Conj_Registros.getString("correo"), Conj_Registros.getString("nombre"), Conj_Registros.getString("apellido"), Conj_Registros.getInt("edad"), Conj_Registros.getString("contra"), Conj_Registros.getBytes("foto"), Conj_Registros.getBlob("foto"));
+                existe = new Usuario(Conj_Registros.getString(1), Conj_Registros.getString(3), Conj_Registros.getString(4), Conj_Registros.getInt(5), Conj_Registros.getString(2), Conj_Registros.getBytes(6), Conj_Registros.getBlob(6));
             }
         } catch (SQLException ex) {
             System.out.println("Error en el acceso a la BD.");
         }
+        ConexionEstatica.cerrarBD();
         return existe;//Si devolvemos null el usuario no existe.
     }
 
@@ -108,8 +114,7 @@ public class ConexionEstatica {
         }
         return personasBD;
     }
-    */
-    
+     */
     public static LinkedList obtenerPersonas() {
         LinkedList personasBD = new LinkedList<>();
         Usuario u = null;
@@ -117,7 +122,7 @@ public class ConexionEstatica {
             String sentencia = "SELECT * FROM Usuario";
             ConexionEstatica.Conj_Registros = ConexionEstatica.Sentencia_SQL.executeQuery(sentencia);
             while (Conj_Registros.next()) {
-                u = new Usuario(Conj_Registros.getString("correo"), Conj_Registros.getString("nombre"), Conj_Registros.getString("apellido"), Conj_Registros.getInt("edad"), Conj_Registros.getString("contra"), Conj_Registros.getBytes("foto") ,Conj_Registros.getBlob("foto"));
+                u = new Usuario(Conj_Registros.getString("correo"), Conj_Registros.getString("nombre"), Conj_Registros.getString("apellido"), Conj_Registros.getInt("edad"), Conj_Registros.getString("contra"), Conj_Registros.getBytes("foto"), Conj_Registros.getBlob("foto"));
                 personasBD.add(u);
             }
         } catch (SQLException ex) {
@@ -144,7 +149,7 @@ public class ConexionEstatica {
         }
         return aulasBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -164,7 +169,7 @@ public class ConexionEstatica {
         }
         return rolesBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -270,7 +275,7 @@ public class ConexionEstatica {
 
         return franjasBD;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -292,7 +297,7 @@ public class ConexionEstatica {
 
         return franjasBD;
     }
-    
+
     public static Usuario existeUsuarioBD(String usuario) {
         Usuario existe = null;
         ConexionEstatica.nueva();
@@ -313,12 +318,12 @@ public class ConexionEstatica {
         ConexionEstatica.cerrarBD();
         return existe;//Si devolvemos null el usuario no existe.
     }
-    
-    public static String obtenerRolUsuario (String usuario) {
+
+    public static String obtenerRolUsuario(String usuario) {
         String rol = "";
-        
+
         ConexionEstatica.nueva();
-        
+
         try {
             String sentencia = "SELECT descripcion FROM Rol WHERE codRol = (SELECT codRol FROM AsignarRol WHERE profesor = '" + usuario + "');";
             //Preparamos la sentencia para evitar la inyección.
@@ -332,12 +337,12 @@ public class ConexionEstatica {
         } catch (SQLException ex) {
             System.out.println("Error en el acceso a la BD.");
         }
-        
+
         ConexionEstatica.cerrarBD();
-        
+
         return rol;
     }
-    
+
     /**
      * Usando una LinkedList.
      *
@@ -390,18 +395,67 @@ public class ConexionEstatica {
         String Sentencia = "UPDATE " + tabla + " SET finHOra = '" + hora + "' WHERE codFranja = '" + codFranja + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
     }
-    
+
     public void Modificar_Aisgnar_Rol(String tabla, String profesor, int codRol) throws SQLException {
         String Sentencia = "UPDATE " + tabla + " SET codRol = '" + codRol + "' WHERE profesor = '" + profesor + "'";
         Sentencia_SQL.executeUpdate(Sentencia);
     }
 
     public void Modificar_Reserva(String profesor, String fecha, int codAula, String inicioHora) throws SQLException {
-        String Sentencia = "UPDATE Reserva SET profesor = '" + profesor +"', Reservado = 'Reservado' \n"
-                + "WHERE fecha = '" + fecha +"' AND\n"
+        String Sentencia = "UPDATE Reserva SET profesor = '" + profesor + "', Reservado = 'Reservado' \n"
+                + "WHERE fecha = '" + fecha + "' AND\n"
                 + "codAula = '" + codAula + "' AND\n"
                 + "codFranja = (SELECT codFranja FROM Franja WHERE inicioHora = '" + inicioHora + "')";
         Sentencia_SQL.executeUpdate(Sentencia);
+    }
+    
+    public static void Modificar_Contrasena(String correo, String contraNueva) throws SQLException {
+        PreparedStatement ps = null;
+        String sql = "UPDATE Usuario SET contra =? WHERE correo =?";
+        ConexionEstatica.nueva();
+        
+        try {
+            ps = ConexionEstatica.Conex.prepareStatement(sql);
+            ps.setString(1, contraNueva);
+            ps.setString(2, correo);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error general: " + ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                ConexionEstatica.cerrarBD();
+            } catch (Exception ex) {
+                System.out.println("Error general: " + ex.getMessage());
+            }
+        }
+    }
+    
+    public static void modificarFoto(Usuario p, String correo) {
+
+        ConexionEstatica.nueva();
+        String sql = "UPDATE Usuario SET foto =? WHERE correo =?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = ConexionEstatica.Conex.prepareStatement(sql);
+            ps.setBytes(1, p.getFoto());
+            ps.setString(2, correo);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error general: " + ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                ConexionEstatica.cerrarBD();
+            } catch (Exception ex) {
+                System.out.println("Error general: " + ex.getMessage());
+            }
+        }
     }
 
     //----------------------------------------------------------
@@ -409,7 +463,7 @@ public class ConexionEstatica {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     //----------------------------------------------------------
     public static void insertarPersona(Usuario p) {
 
@@ -439,7 +493,7 @@ public class ConexionEstatica {
             }
         }
     }
-    
+
     public static void insertarRolPersona(Usuario p) {
 
         ConexionEstatica.nueva();
@@ -464,7 +518,7 @@ public class ConexionEstatica {
             }
         }
     }
-    
+
     //----------------------------------------------------------
     public static void Insertar_Usuario_Foto(String tabla, String correo, String contra, String nombre, String apellido, int edad, Blob foto) throws SQLException {
         String Sentencia = "INSERT INTO " + tabla + " VALUES ('" + correo + "', '" + contra + "', '" + nombre + "', '" + apellido + "', '" + edad + "','" + foto + "');";
@@ -501,12 +555,12 @@ public class ConexionEstatica {
         String Sentencia = "DELETE FROM " + tabla + " WHERE codAula = '" + codAula + "'";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Borrar_Reserva(int codAula, int codFranja, String profesor, String fecha) throws SQLException {
         String Sentencia = "DELETE FROM Reserva WHERE codAula = '" + codAula + "' AND codFranja = '" + codFranja + "' AND profesor = '" + profesor + "' AND fecha = '" + fecha + "'";
         Sentencia_SQL.execute(Sentencia);
     }
-    
+
     public void Borrar_Asignar_Rol(String profesor) throws SQLException {
         String Sentencia = "DELETE FROM AsignarRol WHERE profesor = '" + profesor + "'";
         Sentencia_SQL.execute(Sentencia);

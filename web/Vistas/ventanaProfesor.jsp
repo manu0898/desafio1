@@ -42,7 +42,8 @@
             Elige aula 
             <select name="eligeAula">
 
-                <%                    for (Aula paux : aulas) {
+                <%                    
+                    for (Aula paux : aulas) {
                 %>
 
                 <option value='<%= paux.getCodAula()%>'><%= paux.getCodAula()%></option>

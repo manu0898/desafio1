@@ -27,6 +27,8 @@
     <body>
         <%
 
+            String correo = "";
+
             /*
             String nombre = request.getParameter("nombreReg");
             String apellido = request.getParameter("apellidoReg");
@@ -34,8 +36,7 @@
             int edad = Integer.parseInt(request.getParameter("edadReg"));
             String contra = request.getParameter("contraReg");
             String contra2 = request.getParameter("contra2Reg
-            */
-
+             */
             //if (nombre != null && email != null && contra != "" && contra2 != "" && apellido != null && contra.equals(contra2)) {
             //ConexionEstatica.nueva();
             //Usuario u = ConexionEstatica.existeUsuario(email);
@@ -89,6 +90,7 @@
                     }
                     if (key.equals("correoReg")) {
                         p.setCorreo(valor);
+                        correo = p.getCorreo();
                     }
                     if (key.equals("apellidoReg")) {
                         p.setApellido(valor);
@@ -98,13 +100,41 @@
                     }
                 }
             }
-
-            //Usuario u = ConexionEstatica.existeUsuario(p.getCorreo());
             
+            ConexionEstatica.nueva();
+
+            Usuario comprobar = ConexionEstatica.existeUsuario(correo);
+            if (comprobar == null) {
+                ConexionEstatica.insertarPersona(p);
+                ConexionEstatica.insertarRolPersona(p);
+
+                ConexionEstatica.Insertar_Rol_Usuario("AsignarRol", 0, p.getCorreo());
+
+                String vieneAdmin = (String) session.getAttribute("vieneDeAdmin");
+
+                if (vieneAdmin.equals("no")) {
+                    response.sendRedirect("../index.html");
+                } else {
+                    if (vieneAdmin.equals("si")) {
+
+                        //recargar la pagina
+                        LinkedList usuarios = ConexionEstatica.obtenerPersonas();
+                        session.setAttribute("usuarios", usuarios);
+
+                        ConexionEstatica.cerrarBD();
+
+                        response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
+                    }
+                }
+            } else {
+                ConexionEstatica.cerrarBD();
+                response.sendRedirect("../Vistas/registro.jsp");
+            }
+
+            /*
             ConexionEstatica.insertarPersona(p);
             ConexionEstatica.insertarRolPersona(p);
-
-            //ConexionEstatica.Insertar_Rol_Usuario("AsignarRol", 0, p.getCorreo());
+            ConexionEstatica.Insertar_Rol_Usuario("AsignarRol", 0, p.getCorreo());
             String vieneAdmin = (String) session.getAttribute("vieneDeAdmin");
 
             if (vieneAdmin.equals("no")) {
@@ -113,17 +143,18 @@
                 if (vieneAdmin.equals("si")) {
 
                     ConexionEstatica.nueva();
-                    
+
                     //recargar la pagina
                     LinkedList usuarios = ConexionEstatica.obtenerPersonas();
                     session.setAttribute("usuarios", usuarios);
-                    
+
                     ConexionEstatica.cerrarBD();
 
                     response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
                 }
             }
             //}
+            */
 
             /*
             if (u == null) {
@@ -158,6 +189,5 @@
             //}
              */
         %>
-        <a href='../index.html'>Volver</a>
     </body>
 </html>

@@ -4,6 +4,8 @@
     Author     : daw209
 --%>
 
+<%@page import="Auxiliar.Email"%>
+<%@page import="java.util.Random"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.io.FileInputStream"%>
 <%@page import="java.io.File"%>
@@ -64,7 +66,7 @@
                     session.setAttribute("aulas", aulas);
 
                     ConexionEstatica.cerrarBD();
-                    
+
                     session.setAttribute("rolIniciaSesion", "Profesor");
 
                     response.sendRedirect("../Vistas/ventanaProfesor.jsp");
@@ -330,10 +332,10 @@
     if (request.getParameter("verBitacora") != null) {
         response.sendRedirect("../Vistas/verBitacora.jsp");
     }
-    
+
     //-------------------------------------------
     if (request.getParameter("verReservas") != null) {
-        
+
         ConexionEstatica.nueva();
 
         //recargar la pagina
@@ -341,7 +343,7 @@
         session.setAttribute("todasReservas", reservas);
 
         ConexionEstatica.cerrarBD();
-        
+
         response.sendRedirect("../Vistas/ventanaVerTodasLasReservas.jsp");
     }
 
@@ -503,7 +505,7 @@
 
     //--------------------------------------------
     if (request.getParameter("entrarAdminAula") != null) {
-        
+
         ConexionEstatica.nueva();
 
         LinkedList aulas = ConexionEstatica.obtenerAulas();
@@ -528,7 +530,7 @@
                 session.setAttribute("aulas", aulas2);
 
                 ConexionEstatica.cerrarBD();
-                
+
                 session.setAttribute("rolIniciaSesion", "Profesor");
 
                 response.sendRedirect("../Vistas/ventanaProfesor.jsp");
@@ -550,7 +552,7 @@
 
         LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
         session.setAttribute("roles", roles);
-        
+
         LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
         session.setAttribute("todasReservas", reservas);
 
@@ -596,7 +598,7 @@
         response.sendRedirect("../Vistas/gestionarRoles.jsp");
 
     }
-    
+
     //----------------------------------------
     if (request.getParameter("elimCRUReservas") != null) {
 
@@ -620,5 +622,85 @@
 
         ConexionEstatica.cerrarBD();
 
+    }
+
+    //------------------------------------
+    if (request.getParameter("enviarContra") != null) {
+
+        Email email = new Email();
+        String usuario = request.getParameter("emailContra");
+        String contra = "";
+
+        char[] chr = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+        char[] aleatorio = new char[8];
+
+        for (int i = 0; i <= 7; i++) {
+            aleatorio[i] = chr[(int) (Math.random() * 36)];
+
+            contra += aleatorio[i];
+        }
+
+        ConexionEstatica.nueva();
+        Usuario p = ConexionEstatica.existeUsuario(usuario);
+
+        if (p != null) {
+
+            String de = "auxiliardaw2@gmail.com";
+            String clave = "Chubaca20";
+            String para = usuario;
+            String mensaje = "Hola " + p.getNombre() + ", tu nueva contraseña es: " + contra;
+            String asunto = "Recuperar contraseña";
+
+            ConexionEstatica.Modificar_Contrasena(usuario, Codificar.codifica(contra));
+
+            email.enviarCorreo(de, clave, para, mensaje, asunto);
+            out.println("Correo enviado");
+
+            Bitacora.escribirBitacora("El usuario " + p.getNombre() + " ha solicitado una nueva contraseña.");
+
+        } else {
+            out.print("No nay datos para ese email.");
+        }
+
+        ConexionEstatica.cerrarBD();
+
+    }
+
+    //----------------------------------
+    if (request.getParameter("cambiarContra") != null) {
+        response.sendRedirect("../Vistas/cambiarContrasena.jsp");
+    }
+
+    //----------------------------------
+    if (request.getParameter("cambiarFoto") != null) {
+        response.sendRedirect("../Vistas/cambiarFotoPerfil.jsp");
+    }
+
+    //---------------------------------
+    if (request.getParameter("cambiarContraUsu") != null) {
+
+        String contra = request.getParameter("pw");
+        String contra2 = request.getParameter("pw2");
+        Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
+        String correo = u.getCorreo();
+
+        ConexionEstatica.nueva();
+
+        if (contra.equals(contra2)) {
+            ConexionEstatica.Modificar_Contrasena(correo, Codificar.codifica(contra));
+            Bitacora.escribirBitacora("El usuario " + u.getNombre() + " ha cambiado su contraseña.");
+            
+            Usuario u2 = ConexionEstatica.existeUsuario(correo);
+            session.setAttribute("usuarioLogueado", u2);
+        }
+
+        ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/editarPerfil.jsp");
+    }
+
+    //----------------------------------
+    if (request.getParameter("volverPerfil") != null) {
+        response.sendRedirect("../Vistas/editarPerfil.jsp");
     }
 %>

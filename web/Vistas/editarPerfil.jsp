@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar perfil</title>
+        <title>Perfil</title>
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
     </head>
 
@@ -65,16 +65,16 @@
 
         %>
         
-        Tus datos:<br><br>
+        Nombre: <%= u.getNombre()%><br><br>
+        Apellido: <%= u.getApellido()%><br><br>
+        Correo: <%= u.getCorreo()%><br><br>
+        Edad: <%= u.getEdad()%> años<br><br>
+        Foto: <img src='<%=u.getFotoimgString() %>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
         
-        Nombre: <input type="text" name ="nom" value='<%= u.getNombre()%>'><br><br>
-        Apellido: <input type="text" name ="ape" value='<%= u.getApellido()%>'><br><br>
-        Correo: <input type="text" name ="cor" value='<%= u.getCorreo()%>'><br><br>
-        Edad: <input type="number" name ="ed" value='<%= u.getEdad()%>'><br><br>
-        Foto: <input type="image" name ="ft" value='<%= u.getFotoBlob()%>'><br><br>
-        
-        Nueva contraseña: <input type="password" name ="pw" value=''><br><br>
-        Repite la contraseña: <input type="password" name ="pw2" value=''><br><br>
+        <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
+            <input type="submit" name="cambiarContra" value="Cambiar contraseña"><br><br>
+            <input type="submit" name="cambiarFoto" value="Cambiar foto">
+        </form>
 
     </body>
 </html>

@@ -6,6 +6,8 @@
 package Modelo;
 
 import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
 
 /**
  *
@@ -112,6 +114,18 @@ public class Usuario {
 
     public void setFotoBlob(Blob fotoBlob) {
         this.fotoBlob = fotoBlob;
+    }
+    
+    public String getFotoimgString() {
+        String image =null;
+        try {
+            byte[] imageBytes = this.fotoBlob.getBytes(1, (int) this.fotoBlob.length());
+            String encodedImage = Base64.getEncoder().encodeToString(imageBytes);
+            image = "data:image/jpg;base64," + encodedImage;
+            
+        } catch (SQLException ex) {
+        }
+        return image;
     }
 
 }

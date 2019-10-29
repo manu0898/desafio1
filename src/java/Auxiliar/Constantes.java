@@ -15,5 +15,6 @@ public class Constantes {
     public static String password="Chubaca2019";
     public static String ficheroBitacora="bitacora.txt";
     
+    public static String rutaBitacora = "/home/daw209/Documentos/glassfish5/glassfish/domains/domain1/config/bitacora.txt";
     public static String rutaServidor = "/home/daw209/Escritorio/Desafio1/web/Perfiles/";
 }

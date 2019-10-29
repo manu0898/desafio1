@@ -4,6 +4,11 @@
     Author     : daw209
 --%>
 
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.File"%>
+<%@page import="Auxiliar.Constantes"%>
+<%@page import="Auxiliar.Bitacora"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,9 +17,9 @@
         <title>Ver bitácora</title>
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
     </head>
-    
+
     <body>
-        
+
         <nav>
             <ul>
                 <li><a href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
@@ -26,8 +31,43 @@
                 <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
             </ul>
         </nav>
-        
-        <h1>Hello World!</h1>
-        
+
+        Contenido del archivo Bitácora<br><br>
+
+        <%
+            //String texto;
+            //Bitacora b = new Bitacora();
+            //texto = b.LeerFichero(Constantes.rutaBitacora);
+            //out.print(texto);
+
+            File archivo = null;
+            FileReader fr = null;
+            BufferedReader br = null;
+
+            try {
+                archivo = new File(Constantes.rutaBitacora);
+                fr = new FileReader(archivo);
+                br = new BufferedReader(fr);
+
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    out.print(linea);
+        %>
+        <br>
+        <%
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (null != fr) {
+                        fr.close();
+                    }
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
+        %>
+
     </body>
 </html>

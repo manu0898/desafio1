@@ -58,7 +58,7 @@
             if (rol != null) {
 
                 if (rol.getCodRol() == 0) {
-                    Bitacora.escribirBitacora("El usuario " + p.getNombre() + " ha entrado en la ventana del profesor.");
+                    Bitacora.escribirBitacora("El usuario " + p.getCorreo()+ " ha entrado en la ventana del profesor.");
 
                     ConexionEstatica.nueva();
 

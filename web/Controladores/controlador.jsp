@@ -4,6 +4,7 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Fecha"%>
 <%@page import="Auxiliar.Email"%>
 <%@page import="java.util.Random"%>
 <%@page import="java.io.InputStream"%>
@@ -58,7 +59,7 @@
             if (rol != null) {
 
                 if (rol.getCodRol() == 0) {
-                    Bitacora.escribirBitacora("El usuario " + p.getCorreo()+ " ha entrado en la ventana del profesor.");
+                    Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha entrado en la ventana del profesor.");
 
                     ConexionEstatica.nueva();
 
@@ -207,6 +208,18 @@
         String desc = request.getParameter("descripcionAdd");
 
         con.Insertar_Aula("Aula", codAula, desc);
+
+        //añadir el aula a la tabla de reservas
+        LinkedList<Fecha> fechas = ConexionEstatica.obtenerFechas();
+        LinkedList<Franja> franjas = ConexionEstatica.obtenerFranjasHorarias();
+        String reservado = "Libre";
+
+        for (Fecha paux2 : fechas) {
+            for (Franja paux : franjas) {
+                ConexionEstatica.Insertar_Aula_Nueva_Tabla_Reservas(codAula, paux.getCodFranja(), reservado, paux2.getFecha());
+                //out.print(codAula + " " + paux.getCodFranja() + " " + reservado + " " + paux2.getFecha());
+            }
+        }
 
         //recargar la pagina
         LinkedList aulas = ConexionEstatica.obtenerAulas();
@@ -390,7 +403,7 @@
         //recargar la pagina
         LinkedList usuarios = ConexionEstatica.obtenerPersonas();
         session.setAttribute("usuarios", usuarios);
-        
+
         LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
         session.setAttribute("roles", roles);
 
@@ -692,7 +705,7 @@
         if (contra.equals(contra2)) {
             ConexionEstatica.Modificar_Contrasena(correo, Codificar.codifica(contra));
             Bitacora.escribirBitacora("El usuario " + u.getNombre() + " ha cambiado su contraseña.");
-            
+
             Usuario u2 = ConexionEstatica.existeUsuario(correo);
             session.setAttribute("usuarioLogueado", u2);
         }
@@ -705,5 +718,21 @@
     //----------------------------------
     if (request.getParameter("volverPerfil") != null) {
         response.sendRedirect("../Vistas/editarPerfil.jsp");
+    }
+
+    //----------------------------------
+    if (request.getParameter("prueba") != null) {
+
+        ConexionEstatica.nueva();
+
+        LinkedList fechas = ConexionEstatica.obtenerFechas();
+        session.setAttribute("fechasPrueba", fechas);
+
+        LinkedList franajs = ConexionEstatica.obtenerFranjasHorarias();
+        session.setAttribute("franjasPrueba", franajs);
+
+        ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/prueba.jsp");
     }
 %>

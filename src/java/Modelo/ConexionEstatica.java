@@ -960,18 +960,18 @@ public class ConexionEstatica {
     public static void Insertar_Usuario_Foto(String tabla, String correo, String contra, String nombre, String apellido, int edad, Blob foto) throws SQLException {
         
         ConexionEstatica.nueva();
-        String sql = "INSERT INTO ? VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Usuario VALUES (?, ?, ?, ?, ?, ?);";
         PreparedStatement ps = null;
         
         try {
             ps = ConexionEstatica.Conex.prepareStatement(sql);
-            ps.setString(1, tabla);
-            ps.setString(2, correo);
-            ps.setString(3, contra);
-            ps.setString(4, nombre);
-            ps.setString(5, apellido);
-            ps.setInt(6, edad);
-            ps.setBlob(7, foto);
+            //ps.setString(1, tabla);
+            ps.setString(1, correo);
+            ps.setString(2, contra);
+            ps.setString(3, nombre);
+            ps.setString(4, apellido);
+            ps.setInt(5, edad);
+            ps.setBlob(6, foto);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error de SQL: " + ex.getMessage());
@@ -993,14 +993,14 @@ public class ConexionEstatica {
     public static void Insertar_Rol_Usuario(String tabla, int codRol, String profesor) throws SQLException {
         
         ConexionEstatica.nueva();
-        String sql = "INSERT INTO ? VALUES (?, ?);";
+        String sql = "INSERT INTO AsignarRol VALUES (?, ?);";
         PreparedStatement ps = null;
         
         try {
             ps = ConexionEstatica.Conex.prepareStatement(sql);
-            ps.setString(1, tabla);
-            ps.setInt(2, codRol);
-            ps.setString(3, profesor);
+            //ps.setString(1, tabla);
+            ps.setInt(1, codRol);
+            ps.setString(2, profesor);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error de SQL: " + ex.getMessage());
@@ -1022,14 +1022,14 @@ public class ConexionEstatica {
     public void Insertar_Aula(String tabla, int codAula, String desc) throws SQLException {
         
         ConexionEstatica.nueva();
-        String sql = "INSERT INTO ? VALUES (?, ?);";
+        String sql = "INSERT INTO Aula VALUES (?, ?);";
         PreparedStatement ps = null;
         
         try {
             ps = ConexionEstatica.Conex.prepareStatement(sql);
-            ps.setString(1, tabla);
-            ps.setInt(2, codAula);
-            ps.setString(3, desc);
+            //ps.setString(1, tabla);
+            ps.setInt(1, codAula);
+            ps.setString(2, desc);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error de SQL: " + ex.getMessage());
@@ -1051,16 +1051,16 @@ public class ConexionEstatica {
     public void Insertar_Reserva(String tabla, int codAula, int codFranja, String profesor, String fecha) throws SQLException {
         
         ConexionEstatica.nueva();
-        String sql = "INSERT INTO ? VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO Reserva VALUES (?, ?, ?, ?);";
         PreparedStatement ps = null;
         
         try {
             ps = ConexionEstatica.Conex.prepareStatement(sql);
-            ps.setString(1, tabla);
-            ps.setInt(2, codAula);
-            ps.setInt(3, codFranja);
-            ps.setString(4, profesor);
-            ps.setString(5, fecha);
+            //ps.setString(1, tabla);
+            ps.setInt(1, codAula);
+            ps.setInt(2, codFranja);
+            ps.setString(3, profesor);
+            ps.setString(4, fecha);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error de SQL: " + ex.getMessage());
@@ -1110,6 +1110,31 @@ public class ConexionEstatica {
         //Sentencia_SQL.execute(Sentencia);
     }
 
+    public static void Insertar_Aula_Nueva_Tabla_Reservas(int codAula, int codFranja, String fecha, String reservado) {
+       ConexionEstatica.nueva();
+        String sql = "INSERT INTO Reserva (`codAula`, `codFranja`, `fecha`, `Reservado`) VALUES (?, ?, ?, ?);";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = ConexionEstatica.Conex.prepareStatement(sql);
+            ps.setInt(1, codAula);
+            ps.setInt(2, codFranja);
+            ps.setString(3, fecha);
+            ps.setString(4, reservado);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error general: " + ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                ConexionEstatica.cerrarBD();
+            } catch (Exception ex) {
+                System.out.println("Error general: " + ex.getMessage());
+            }
+        }
+    }
     //----------------------------------------------------------
     public void Borrar_Usuario(String tabla, String correo) throws SQLException {
         
@@ -1142,13 +1167,13 @@ public class ConexionEstatica {
     public void Borrar_Aula(String tabla, int codAula) throws SQLException {
         
         ConexionEstatica.nueva();
-        String sql = "DELETE FROM ? WHERE codAula =?";
+        String sql = "DELETE FROM Aula WHERE codAula =?";
         PreparedStatement ps = null;
         
         try {
             ps = ConexionEstatica.Conex.prepareStatement(sql);
-            ps.setString(1, tabla);
-            ps.setInt(2, codAula);
+            //ps.setString(1, tabla);
+            ps.setInt(1, codAula);
             ps.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Error de SQL: " + ex.getMessage());

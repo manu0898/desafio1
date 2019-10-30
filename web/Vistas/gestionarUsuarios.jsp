@@ -59,7 +59,7 @@
                             <td><input type="text" class="elemento" name ="nombreCrud" value='<%= paux.getNombre()%>'></td>
                             <td><input type="text" class="elemento" name ="apellidoCrud" value='<%= paux.getApellido()%>'></td>
                             <td><input type="number" class="elemento" name ="edadCrud" value='<%= paux.getEdad()%>'></td>
-                            
+
                             <td><input type="submit" class="elemento" name="modifCRUDUsuarios" value="Modificar"></td>
                             <td><input type="submit" class="elemento" name="elimCRUDUsuarios" value="Eliminar"></td>
                         </tr>
@@ -70,7 +70,7 @@
                         }
 
                     %>
-                    
+
                 </table>
             </div>
 
@@ -81,6 +81,6 @@
                 </form>
             </div>
         </div>
-                
+
     </body>
 </html>

@@ -736,4 +736,14 @@
     if (request.getParameter("volverPerfil") != null) {
         response.sendRedirect("../Vistas/editarPerfil.jsp");
     }
+    
+    //----------------------------------
+    if (request.getParameter("volverReserva") != null) {
+        response.sendRedirect("../Vistas/ventanaProfesor.jsp");
+    }
+    
+    //----------------------------------
+    if (request.getParameter("volverDetalle") != null) {
+        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
+    }
 %>

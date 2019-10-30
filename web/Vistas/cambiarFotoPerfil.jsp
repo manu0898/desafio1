@@ -21,6 +21,9 @@
             Foto <input type="file" class="elemento" id="fichero2" name="fichero2"/><br><br><br><br> 
             
             <input type="submit" class="elemento" name="cambiarFotoUsu" value="Cambiar"><br><br>
+        </form>
+        
+        <form name="form" action="../Controladores/controlador.jsp" method="POST">
             <input type="submit" class="elemento" name="volverPerfil" value="Volver">
         </form>
         

@@ -818,6 +818,31 @@ public class ConexionEstatica {
         //        + "codFranja = (SELECT codFranja FROM Franja WHERE inicioHora = '" + inicioHora + "')";
         //Sentencia_SQL.executeUpdate(Sentencia);
     }
+    
+    public void Modificar_Reserva_Usuario_Eliminado(String profesor) throws SQLException {
+        
+        ConexionEstatica.nueva();
+        PreparedStatement ps = null;
+        String sql = "UPDATE Reserva SET profesor ='', Reservado = 'Libre' WHERE profesor =? ";
+
+        try {
+            ps = ConexionEstatica.Conex.prepareStatement(sql);
+            //ps.setString(1, tabla);
+            ps.setString(1, profesor);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Error de SQL: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error general: " + ex.getMessage());
+        } finally {
+            try {
+                ps.close();
+                ConexionEstatica.cerrarBD();
+            } catch (Exception ex) {
+                System.out.println("Error general: " + ex.getMessage());
+            }
+        }
+    }
 
     public static void Modificar_Contrasena(String correo, String contraNueva) throws SQLException {
         PreparedStatement ps = null;
@@ -1326,6 +1351,31 @@ public class ConexionEstatica {
         */
         
         return rol;//Si devolvemos null el usuario no existe.
+    }
+    
+    public Captcha Consultar_Captcha(int cod) throws SQLException {
+        Captcha c = null;
+        
+        ConexionEstatica.nueva();
+        PreparedStatement ps = null;
+        String sql = "SELECT * FROM Captcha WHERE cod =?";
+
+        try {
+            //Preparamos la sentencia para evitar la inyección.
+            ps = ConexionEstatica.Conex.prepareStatement(sql);
+            ps.setInt(1, cod);
+            ConexionEstatica.Conj_Registros = ps.executeQuery();
+
+            while (ConexionEstatica.Conj_Registros.next())//Si devuelve true es que existe.
+            {
+                c = new Captcha(Conj_Registros.getInt(1), Conj_Registros.getString(2), Conj_Registros.getBytes(3), Conj_Registros.getBlob(3));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en el acceso a la BD.");
+        }
+        ConexionEstatica.cerrarBD();
+        
+        return c;//Si devolvemos null el usuario no existe.
     }
 
 }

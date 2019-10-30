@@ -18,7 +18,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ventana del profesor</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
 
     <body>
@@ -38,9 +40,9 @@
 
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            Fecha <input type="date" name="fechaR"><br><br>
+            Fecha <input type="date" class="elemento" name="fechaR"><br><br>
             Elige aula 
-            <select name="eligeAula">
+            <select name="eligeAula" class="elemento">
 
                 <%                    
                     for (Aula paux : aulas) {
@@ -56,11 +58,11 @@
 
             </select><br><br>
 
-            <input type="submit" name="verCuadrante" value="Ver cuadrante"><br><br>
-            <input type="submit" name="verMisReservas" value="Ver mis reservas"><br><br>
+            <input type="submit" class="elemento" name="verCuadrante" value="Ver cuadrante"><br><br>
+            <input type="submit" class="elemento" name="verMisReservas" value="Ver mis reservas"><br><br>
 
-            <br><br><input type="submit" name="volver" value="Volver"/>
-            <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
+            <br><br><input type="submit" class="elemento" name="volver" value="Volver"/>
+            <input type="submit" class="elemento" name="cerrarSesion" value="Cerrar sesión"/>
         </form>
 
     </body>

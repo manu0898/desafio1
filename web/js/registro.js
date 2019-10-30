@@ -30,6 +30,18 @@ $(document).ready(function () {
 
         if ($("#correoReg").val() !== "" && $("#nombreReg").val() !== "" && $("#apellidoReg").val() !== "" && $("#edadReg").val() !== 0 && $("#contraReg").val() !== "" && $("#contra2Reg").val() !== "") {
             alert("Revise los campos");
+        } else {
+            
+        }
+    });
+    
+    $("#comprobar").click(function () {
+        if ($("#contraReg").val() === ($("#contra2Reg").val())) {
+            $("#contraReg").css({'background':'green'});
+            $("#contra2Reg").css({'background':'green'});
+        } else {
+            $("#contraReg").css({'background':'red'});
+            $("#contra2Reg").css({'background':'red'});
         }
     });
 

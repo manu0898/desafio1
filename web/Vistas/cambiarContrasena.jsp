@@ -10,16 +10,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cambio de contraseña</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
     
     <body>
         
         <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-            Nueva contraseña: <input type="password" name ="pw" value=''><br><br>
-            Repite la contraseña: <input type="password" name ="pw2" value=''><br><br> 
+            Nueva contraseña: <input type="password" class="elemento" name ="pw" value=''><br><br>
+            Repite la contraseña: <input type="password" class="elemento" name ="pw2" value=''><br><br> 
             
-            <input type="submit" name="cambiarContraUsu" value="Cambiar"><br><br>
-            <input type="submit" name="volverPerfil" value="Volver">
+            <input type="submit" class="elemento" name="cambiarContraUsu" value="Cambiar"><br><br>
+            <input type="submit" class="elemento" name="volverPerfil" value="Volver">
         </form>
         
     </body>

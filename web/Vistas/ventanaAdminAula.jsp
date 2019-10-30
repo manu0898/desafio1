@@ -10,6 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ventana del administrador de aulas</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
     
     <body>
@@ -18,8 +21,8 @@
         
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            <input type="submit" name="gestionarAulas" value="Gestionar aulas"/><br><br>
-            <input type="submit" name="gestionarFranjHorarias" value="Gestionar franjas horarias"/>
+            <input type="submit" class="elemento" name="gestionarAulas" value="Gestionar aulas"/><br><br>
+            <input type="submit" class="elemento" name="gestionarFranjHorarias" value="Gestionar franjas horarias"/>
 
         </form>
         

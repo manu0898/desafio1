@@ -12,7 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Perfil</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
 
     <body>
@@ -72,8 +74,8 @@
         Foto: <img src='<%=u.getFotoimgString() %>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
         
         <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-            <input type="submit" name="cambiarContra" value="Cambiar contraseña"><br><br>
-            <input type="submit" name="cambiarFoto" value="Cambiar foto">
+            <input type="submit" class="elemento" name="cambiarContra" value="Cambiar contraseña"><br><br>
+            <input type="submit" class="elemento" name="cambiarFoto" value="Cambiar foto">
         </form>
 
     </body>

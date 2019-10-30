@@ -15,15 +15,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Recuperar contraseña</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
 
     <body>
 
         <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-            Correo: <input type="email" name="emailContra"/><br><br>
+            Correo: <input type="email" class="elemento" name="emailContra"/><br><br>
 
-            <input type="submit" name="enviarContra" value="Enviar"/>
-            <input type="submit" name="volverContra" value="Volver"/>
+            <input type="submit" class="elemento" name="enviarContra" value="Enviar"/>
+            <input type="submit" class="elemento" name="volverContra" value="Volver"/>
         </form>
 
     </body>

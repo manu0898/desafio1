@@ -4,6 +4,7 @@
     Author     : daw209
 --%>
 
+<%@page import="Modelo.Captcha"%>
 <%@page import="Modelo.Fecha"%>
 <%@page import="Auxiliar.Email"%>
 <%@page import="java.util.Random"%>
@@ -49,6 +50,7 @@
             ConexionEstatica con = new ConexionEstatica();
 
             session.setAttribute("usuarioLogueado", p);
+            session.setMaxInactiveInterval(60);
 
             LinkedList usuarios = ConexionEstatica.obtenerPersonas();
             session.setAttribute("usuarios", usuarios);
@@ -73,9 +75,13 @@
                     response.sendRedirect("../Vistas/ventanaProfesor.jsp");
                 } else {
                     if (rol.getCodRol() == 1) {
+                        ConexionEstatica.cerrarBD();
+
                         response.sendRedirect("../Vistas/ventanaRolAdminAula.jsp");
                     } else {
                         if (rol.getCodRol() == 2) {
+                            ConexionEstatica.cerrarBD();
+
                             response.sendRedirect("../Vistas/ventanaRolAdminGeneral.jsp");
                         }
                     }
@@ -94,6 +100,17 @@
     if (request.getParameter("registrarse") != null) {
 
         session.setAttribute("vieneDeAdmin", "no");
+
+        ConexionEstatica.nueva();
+
+        ConexionEstatica con = new ConexionEstatica();
+
+        int cod = (int) (Math.random() * 3 + 1);
+
+        Captcha c = (Captcha) con.Consultar_Captcha(cod);
+        session.setAttribute("captcha", c);
+
+        ConexionEstatica.cerrarBD();
 
         response.sendRedirect("../Vistas/registro.jsp");
     }
@@ -134,8 +151,6 @@
 
         ConexionEstatica.nueva();
 
-        ConexionEstatica con = new ConexionEstatica();
-
         String fecha = request.getParameter("fechaR");
         int codAula = Integer.parseInt(request.getParameter("eligeAula"));
 
@@ -161,7 +176,6 @@
         ConexionEstatica.cerrarBD();
 
         response.sendRedirect("../Vistas/ventanaProfesor.jsp");
-
     }
 
     //-------------------------------------------
@@ -217,7 +231,6 @@
         for (Fecha paux2 : fechas) {
             for (Franja paux : franjas) {
                 ConexionEstatica.Insertar_Aula_Nueva_Tabla_Reservas(codAula, paux.getCodFranja(), reservado, paux2.getFecha());
-                //out.print(codAula + " " + paux.getCodFranja() + " " + reservado + " " + paux2.getFecha());
             }
         }
 
@@ -397,6 +410,7 @@
 
         String correo = request.getParameter("correoCrud");
 
+        con.Modificar_Reserva_Usuario_Eliminado(correo);
         con.Borrar_Asignar_Rol(correo);
         con.Borrar_Usuario("Usuario", correo);
 
@@ -406,6 +420,9 @@
 
         LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
         session.setAttribute("roles", roles);
+        
+        LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
+        session.setAttribute("todasReservas", reservas);
 
         ConexionEstatica.cerrarBD();
 
@@ -453,10 +470,9 @@
         LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
         session.setAttribute("reservasHoras", reservas);
 
-        response.sendRedirect("../Vistas/ventanaRealizarReserva.jsp");
-
         ConexionEstatica.cerrarBD();
 
+        response.sendRedirect("../Vistas/ventanaRealizarReserva.jsp");
     }
 
     //----------------------------------------
@@ -471,9 +487,9 @@
         LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
         session.setAttribute("reservasDelUsuario", reservas);
 
-        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
-
         ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
 
     }
 
@@ -488,9 +504,9 @@
         LinkedList franjas = ConexionEstatica.obtenerFranjasHorarias();
         session.setAttribute("franjasDetalle", franjas);
 
-        response.sendRedirect("../Vistas/ventanaDetalles.jsp");
-
         ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/ventanaDetalles.jsp");
 
     }
 
@@ -513,9 +529,9 @@
         LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
         session.setAttribute("reservasDelUsuario", reservas);
 
-        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
-
         ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
 
     }
 
@@ -625,18 +641,19 @@
         Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
 
         String profesor = request.getParameter("profesorCru");
-        int codAula = Integer.parseInt(request.getParameter("codAulaCru"));
-        int codFranja = Integer.parseInt(request.getParameter("codFranjaCru"));
-        String fecha = request.getParameter("fechaCru");
+        //int codAula = Integer.parseInt(request.getParameter("codAulaCru"));
+        //int codFranja = Integer.parseInt(request.getParameter("codFranjaCru"));
+        //String fecha = request.getParameter("fechaCru");
 
-        con.Borrar_Reserva(codAula, codFranja, profesor, fecha);
+        con.Modificar_Reserva_Usuario_Eliminado(profesor);
+        //con.Borrar_Reserva(codAula, codFranja, profesor, fecha);
 
         LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
         session.setAttribute("todasReservas", reservas);
 
-        response.sendRedirect("../Vistas/ventanaVerTodasLasReservas.jsp");
-
         ConexionEstatica.cerrarBD();
+
+        response.sendRedirect("../Vistas/ventanaVerTodasLasReservas.jsp");
 
     }
 
@@ -718,21 +735,5 @@
     //----------------------------------
     if (request.getParameter("volverPerfil") != null) {
         response.sendRedirect("../Vistas/editarPerfil.jsp");
-    }
-
-    //----------------------------------
-    if (request.getParameter("prueba") != null) {
-
-        ConexionEstatica.nueva();
-
-        LinkedList fechas = ConexionEstatica.obtenerFechas();
-        session.setAttribute("fechasPrueba", fechas);
-
-        LinkedList franajs = ConexionEstatica.obtenerFranjasHorarias();
-        session.setAttribute("franjasPrueba", franajs);
-
-        ConexionEstatica.cerrarBD();
-
-        response.sendRedirect("../Vistas/prueba.jsp");
     }
 %>

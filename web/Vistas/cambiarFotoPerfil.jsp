@@ -10,15 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cambio de foto de perfil</title>
+        <link rel="stylesheet" type="text/css" href="../css/micss.css">
+        <link rel="stylesheet" type="text/css" href="../css/menu.css">
+        <link rel="stylesheet" type="text/css" href="../css/tablas.css">
     </head>
     
     <body>
         
         <form name="formContra" enctype="multipart/form-data" action="../Controladores/actulizaFoto.jsp" method="POST">
-            Foto <input type="file" id="fichero2" name="fichero2"/><br><br><br><br> 
+            Foto <input type="file" class="elemento" id="fichero2" name="fichero2"/><br><br><br><br> 
             
-            <input type="submit" name="cambiarFotoUsu" value="Cambiar"><br><br>
-            <input type="submit" name="volverPerfil" value="Volver">
+            <input type="submit" class="elemento" name="cambiarFotoUsu" value="Cambiar"><br><br>
+            <input type="submit" class="elemento" name="volverPerfil" value="Volver">
         </form>
         
     </body>

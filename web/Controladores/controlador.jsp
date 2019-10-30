@@ -390,6 +390,9 @@
         //recargar la pagina
         LinkedList usuarios = ConexionEstatica.obtenerPersonas();
         session.setAttribute("usuarios", usuarios);
+        
+        LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
+        session.setAttribute("roles", roles);
 
         ConexionEstatica.cerrarBD();
 

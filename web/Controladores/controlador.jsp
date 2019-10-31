@@ -50,7 +50,6 @@
             ConexionEstatica con = new ConexionEstatica();
 
             session.setAttribute("usuarioLogueado", p);
-            session.setMaxInactiveInterval(60);
 
             LinkedList usuarios = ConexionEstatica.obtenerPersonas();
             session.setAttribute("usuarios", usuarios);

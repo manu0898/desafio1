@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro</title>
+        <meta http-equiv="refresh" content="60;url=../index.html">
         <script src="../jquery-3.4.1.min.js"></script>
         <script src="../js/registro.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/micss.css">

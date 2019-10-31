@@ -21,7 +21,7 @@
     <body>
 
         <%
-            Captcha c = (Captcha) session.getAttribute("captcha");
+            //Captcha c = (Captcha) session.getAttribute("captcha");
         %>
 
         <form name="form" enctype="multipart/form-data" action="../Controladores/subefichero.jsp" method="POST">
@@ -38,13 +38,6 @@
         </form>
 
         <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-
-            <br>Introduce el código captcha <br>
-            <img src='<%=c.getFotoimgString()%>' id="imgCap" alt='<%=c.getNombre()%>'><br>
-            <input type="text" class="elemento" id="codCaptcha" name="codCaptcha"><br><br>
-
-            <input type="submit" class="elemento" id="comprobar" name='comprobar' value="Comprobar captcha"/>
-
             <br><br><input type="submit" class="elemento" name="volver" value="Volver"/>
         </form>
 

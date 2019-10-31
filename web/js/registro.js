@@ -29,9 +29,9 @@ $(document).ready(function () {
     $("#registrar").click(function () {
 
         if ($("#correoReg").val() !== "" && $("#nombreReg").val() !== "" && $("#apellidoReg").val() !== "" && $("#edadReg").val() !== 0 && $("#contraReg").val() !== "" && $("#contra2Reg").val() !== "") {
-            alert("Revise los campos");
-        } else {
             
+        } else {
+            //alert("Revise los campos");
         }
     });
     

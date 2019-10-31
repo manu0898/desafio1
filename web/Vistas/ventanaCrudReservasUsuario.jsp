@@ -28,7 +28,7 @@
         <div id="menu">
             <nav>
                 <ul>
-                    <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                    <li><a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a></li>
                     <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
                 </ul>
             </nav>

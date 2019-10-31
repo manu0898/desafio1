@@ -4,6 +4,7 @@
     Author     : daw209
 --%>
 
+<%@page import="Auxiliar.Bitacora"%>
 <%@page import="Modelo.ConexionEstatica"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.io.FileInputStream"%>
@@ -58,6 +59,8 @@
             
             Usuario u2 = ConexionEstatica.existeUsuario(correo);
             session.setAttribute("usuarioLogueado", u2);
+            
+            Bitacora.escribirBitacora("El usuario " + correo + " ha actualizado su foto de perfil.");
 
             ConexionEstatica.cerrarBD();
 

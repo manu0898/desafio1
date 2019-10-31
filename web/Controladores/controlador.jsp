@@ -75,11 +75,13 @@
                     response.sendRedirect("../Vistas/ventanaProfesor.jsp");
                 } else {
                     if (rol.getCodRol() == 1) {
+                        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha entrado en la ventana del adminstrador de aulas.");
                         ConexionEstatica.cerrarBD();
 
                         response.sendRedirect("../Vistas/ventanaRolAdminAula.jsp");
                     } else {
                         if (rol.getCodRol() == 2) {
+                            Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha entrado en la ventana del administrador general.");
                             ConexionEstatica.cerrarBD();
 
                             response.sendRedirect("../Vistas/ventanaRolAdminGeneral.jsp");
@@ -101,16 +103,16 @@
 
         session.setAttribute("vieneDeAdmin", "no");
 
-        ConexionEstatica.nueva();
+        //ConexionEstatica.nueva();
 
-        ConexionEstatica con = new ConexionEstatica();
+        //ConexionEstatica con = new ConexionEstatica();
 
-        int cod = (int) (Math.random() * 3 + 1);
+        //int cod = (int) (Math.random() * 3 + 1);
 
-        Captcha c = (Captcha) con.Consultar_Captcha(cod);
-        session.setAttribute("captcha", c);
+        //Captcha c = (Captcha) con.Consultar_Captcha(cod);
+        //session.setAttribute("captcha", c);
 
-        ConexionEstatica.cerrarBD();
+        //ConexionEstatica.cerrarBD();
 
         response.sendRedirect("../Vistas/registro.jsp");
     }
@@ -217,6 +219,8 @@
         ConexionEstatica con = new ConexionEstatica();
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         int codAula = Integer.parseInt(request.getParameter("codAulaAdd"));
         String desc = request.getParameter("descripcionAdd");
@@ -237,6 +241,8 @@
         //recargar la pagina
         LinkedList aulas = ConexionEstatica.obtenerAulas();
         session.setAttribute("aulas", aulas);
+        
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha entrado creado una aula nueva.");
 
         ConexionEstatica.cerrarBD();
 
@@ -248,6 +254,8 @@
     if (request.getParameter("modifCRUDAula") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         ConexionEstatica con = new ConexionEstatica();
 
@@ -262,7 +270,7 @@
 
         ConexionEstatica.cerrarBD();
 
-        Bitacora.escribirBitacora("El administrador ha modificado datos del aula en la base de datos.");
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha modificado los datos del aula con código " + codAula);
 
         response.sendRedirect("../Vistas/gestionarAulas.jsp");
 
@@ -272,6 +280,8 @@
     if (request.getParameter("elimCRUDAula") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         ConexionEstatica con = new ConexionEstatica();
 
@@ -285,7 +295,7 @@
 
         ConexionEstatica.cerrarBD();
 
-        Bitacora.escribirBitacora("El usuario administrador ha eliminado un aula de la base de datos.");
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha eliminado el aula con código " + codAula);
 
         response.sendRedirect("../Vistas/gestionarAulas.jsp");
     }
@@ -294,6 +304,8 @@
     if (request.getParameter("modifCRUDFranja") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         ConexionEstatica con = new ConexionEstatica();
 
@@ -310,7 +322,7 @@
 
         ConexionEstatica.cerrarBD();
 
-        Bitacora.escribirBitacora("El administrador ha modificado datos de la franja horaria en la base de datos.");
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha modificado los datos de la franja con código " + codFranja);
 
         response.sendRedirect("../Vistas/gestionarFranjasHorarias.jsp");
 
@@ -377,6 +389,8 @@
     if (request.getParameter("modifCRUDUsuarios") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         ConexionEstatica con = new ConexionEstatica();
 
@@ -395,7 +409,7 @@
 
         ConexionEstatica.cerrarBD();
 
-        Bitacora.escribirBitacora("El administrador ha modificado datos de un usuario en la base de datos.");
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha modificado los datos del usuario " + correo);
 
         response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
 
@@ -405,6 +419,8 @@
     if (request.getParameter("elimCRUDUsuarios") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         ConexionEstatica con = new ConexionEstatica();
 
@@ -426,7 +442,7 @@
 
         ConexionEstatica.cerrarBD();
 
-        Bitacora.escribirBitacora("El usuario administrador ha eliminado un usuario de la base de datos.");
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha eliminado al usuario " + correo);
 
         response.sendRedirect("../Vistas/gestionarUsuarios.jsp");
     }
@@ -469,6 +485,8 @@
 
         LinkedList reservas = ConexionEstatica.obtenerReservasFecha(fecha, codAula);
         session.setAttribute("reservasHoras", reservas);
+        
+        Bitacora.escribirBitacora("El usuario " + u.getCorreo() + " ha realizao una reserva del aula " + codAula + " el día " + fecha + " a las " + inicioHora);
 
         ConexionEstatica.cerrarBD();
 
@@ -486,6 +504,8 @@
 
         LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
         session.setAttribute("reservasDelUsuario", reservas);
+        
+        Bitacora.escribirBitacora("El usuario " + u.getCorreo() + " ha entrado a la ventana de sus reservas");
 
         ConexionEstatica.cerrarBD();
 
@@ -528,6 +548,8 @@
 
         LinkedList reservas = ConexionEstatica.obtenerReservasUsuario(profesor);
         session.setAttribute("reservasDelUsuario", reservas);
+        
+        Bitacora.escribirBitacora("El usuario " + u.getCorreo() + " ha elimado su reserva del dia " + fecha + " para el aula " + codAula);
 
         ConexionEstatica.cerrarBD();
 
@@ -539,6 +561,8 @@
     if (request.getParameter("entrarAdminAula") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         LinkedList aulas = ConexionEstatica.obtenerAulas();
         session.setAttribute("aulas", aulas);
@@ -552,6 +576,7 @@
 
         if (opcion.equals("adminAula")) {
             session.setAttribute("rolIniciaSesion", "AdminAula");
+            
             response.sendRedirect("../Vistas/ventanaAdminAula.jsp");
         } else {
             if (opcion.equals("profesor")) {
@@ -613,6 +638,8 @@
     if (request.getParameter("modifCRUDRol") != null) {
 
         ConexionEstatica.nueva();
+        
+        Usuario p = (Usuario) session.getAttribute("usuarioLogueado");
 
         ConexionEstatica con = new ConexionEstatica();
 
@@ -624,6 +651,8 @@
         //recargar la pagina
         LinkedList roles = ConexionEstatica.obtenerAsignarRoles();
         session.setAttribute("roles", roles);
+        
+        Bitacora.escribirBitacora("El usuario " + p.getCorreo() + " ha modificado el rol del usuario " + prof);
 
         ConexionEstatica.cerrarBD();
 
@@ -650,6 +679,8 @@
 
         LinkedList reservas = ConexionEstatica.obtenerTodasLasReservas();
         session.setAttribute("todasReservas", reservas);
+        
+        Bitacora.escribirBitacora("El usuario " + u.getCorreo() + " ha eliminado una reserva del usuario " + profesor);
 
         ConexionEstatica.cerrarBD();
 
@@ -726,6 +757,8 @@
             Usuario u2 = ConexionEstatica.existeUsuario(correo);
             session.setAttribute("usuarioLogueado", u2);
         }
+        
+        Bitacora.escribirBitacora("El usuario " + u.getCorreo() + " ha actualizado su contraseña.");
 
         ConexionEstatica.cerrarBD();
 
@@ -745,5 +778,10 @@
     //----------------------------------
     if (request.getParameter("volverDetalle") != null) {
         response.sendRedirect("../Vistas/ventanaCrudReservasUsuario.jsp");
+    }
+    
+    //----------------------------------
+    if (request.getParameter("volverContra") != null) {
+        response.sendRedirect("../index.html");
     }
 %>

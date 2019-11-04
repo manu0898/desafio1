@@ -22,6 +22,18 @@
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myLinks");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        </script>
     </head>
 
     <body>
@@ -32,12 +44,26 @@
 
         %>
 
+        <!--
         <nav>
             <ul>
-                <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
+                <li><a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a></li>
                 <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
             </ul>
         </nav>
+        -->
+        
+        <header id="menu">
+            <div class="topnav">
+                <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
+                <div id="myLinks">
+                    <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                </div>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </header>
 
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
 

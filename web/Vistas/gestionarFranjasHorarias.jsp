@@ -20,7 +20,8 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/gestionarFranjas.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -54,7 +55,7 @@
             </nav>
         </div>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaAdminAula.jsp">Principal</a>
@@ -72,6 +73,7 @@
 
         <div id="contenedorPrincipal">
             <div id="tabla">
+                <h1>Gestión de franjas</h1>
                 <table>
                     <tr>
                         <th>Código franja</th>
@@ -79,17 +81,16 @@
                         <th>Hora de fin</th>
                     </tr>
 
-                    <%                
-                        for (Franja paux : franjas) {
+                    <%                        for (Franja paux : franjas) {
                     %>
 
                     <form name="for" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="codFranja" value='<%= paux.getCodFranja()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="hInicio" value='<%= paux.getInicioHora()%>'></td>
-                            <td><input type="text" class="elemento" name ="hFin" value='<%= paux.getFinHora()%>'></td>
+                            <td><input type="text" name ="codFranja" value='<%= paux.getCodFranja()%>' readonly></td>
+                            <td><input type="text" name ="hInicio" value='<%= paux.getInicioHora()%>'></td>
+                            <td><input type="text" name ="hFin" value='<%= paux.getFinHora()%>'></td>
 
-                            <td><input type="submit" class="elemento" name="modifCRUDFranja" value="Modificar"></td> 
+                            <td><input type="submit" name="modifCRUDFranja" value="Modificar"></td> 
                         </tr>
                     </form>
 
@@ -100,12 +101,6 @@
                     %>
 
                 </table>
-            </div>
-
-            <div id="botones">
-                <form name="form" action="../Controladores/controlador.jsp" method="POST">
-                    <input type="submit" class="elemento" name="volverFranja" value="Volver">
-                </form>
             </div>
         </div>
 

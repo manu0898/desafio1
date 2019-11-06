@@ -21,7 +21,8 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/bitacora.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -49,7 +50,7 @@
             </ul>
         </nav>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a>
@@ -67,42 +68,44 @@
             </div>
         </header>
 
-        Contenido del archivo Bitácora<br><br>
+        <div id="contenedorPrincipal">
 
-        <%
-            //String texto;
-            //Bitacora b = new Bitacora();
-            //texto = b.LeerFichero(Constantes.rutaBitacora);
-            //out.print(texto);
+            <h1>Contenido del archivo Bitácora</h1>
 
-            File archivo = null;
-            FileReader fr = null;
-            BufferedReader br = null;
+            <%
+                //String texto;
+                //Bitacora b = new Bitacora();
+                //texto = b.LeerFichero(Constantes.rutaBitacora);
+                //out.print(texto);
 
-            try {
-                archivo = new File(Constantes.rutaBitacora);
-                fr = new FileReader(archivo);
-                br = new BufferedReader(fr);
+                File archivo = null;
+                FileReader fr = null;
+                BufferedReader br = null;
 
-                String linea;
-                while ((linea = br.readLine()) != null) {
-                    out.print(linea);
-        %>
-        <br><br>
-        <%
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
                 try {
-                    if (null != fr) {
-                        fr.close();
-                    }
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
-            }
-        %>
+                    archivo = new File(Constantes.rutaBitacora);
+                    fr = new FileReader(archivo);
+                    br = new BufferedReader(fr);
 
+                    String linea;
+                    while ((linea = br.readLine()) != null) {
+                        out.print(linea);
+            %>
+            <br><br>
+            <%
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (null != fr) {
+                            fr.close();
+                        }
+                    } catch (Exception e2) {
+                        e2.printStackTrace();
+                    }
+                }
+            %>
+        </div>
     </body>
 </html>

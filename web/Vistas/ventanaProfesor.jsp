@@ -61,7 +61,8 @@
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
                     <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
-                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas</a>
+                    <a href="../Vistas/ventanaDetallesFranjas.jsp">Ver detalles franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -72,9 +73,9 @@
         <div id="contenedorPrincipal">
             <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-                Fecha <input type="date" class="elemento" name="fechaR"><br><br>
+                Fecha <input type="date" name="fechaR"><br><br>
                 Elige aula 
-                <select name="eligeAula" class="elemento">
+                <select name="eligeAula">
 
                     <%                    for (Aula paux : aulas) {
                     %>
@@ -89,10 +90,10 @@
 
                 </select><br><br>
 
-                <input type="submit" class="elemento" name="verCuadrante" value="Ver cuadrante"><br><br>
-                <input type="submit" class="elemento" name="verMisReservas" value="Ver mis reservas"><br><br>
+                <input type="submit" name="verCuadrante" value="Ver cuadrante"><br><br>
+                <input type="submit" name="verMisReservas" value="Ver mis reservas"><br><br>
 
-                <br><br><input type="submit" class="elemento" name="cerrarSesion" value="Cerrar sesión"/>
+                <br><br><input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
             </form>
         </div>
 

@@ -20,7 +20,8 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/detalles.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -38,7 +39,6 @@
         <%
 
             LinkedList<Aula> aulas = (LinkedList) session.getAttribute("aulasDetalle");
-            LinkedList<Franja> franjas = (LinkedList) session.getAttribute("franjasDetalle");
 
         %>
 
@@ -60,7 +60,8 @@
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
                     <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
-                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas</a>
+                    <a href="../Vistas/ventanaDetallesFranjas.jsp">Ver detalles franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -70,9 +71,10 @@
 
         <div id="contenedorPrincipal">
 
-            Detalle de las aulas:
-
             <div id="tabla">
+
+                <h1>Detalle de las aulas:</h1>
+
                 <table>
                     <tr>
                         <th>Código de aula</th>
@@ -84,38 +86,8 @@
 
                     <form name="form2" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="codAula" value='<%= paux.getCodAula()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="codFranja" value='<%= paux.getDescripcion()%>' readonly></td>
-                        </tr>
-                    </form>
-
-                    <%
-
-                        }
-
-                    %>
-
-                </table>
-            </div>
-
-            Detalle de las franjas horarias:
-
-            <div id="tabla2">
-                <table>
-                    <tr>
-                        <th>Código de franja</th>
-                        <th>Hora de inicio</th>
-                        <th>Hora de fin</th>
-                    </tr>
-
-                    <%            for (Franja paux : franjas) {
-                    %>
-
-                    <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-                        <tr>
-                            <td><input type="text" class="elemento" name ="codAula" value='<%= paux.getCodFranja()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="codFranja" value='<%= paux.getInicioHora()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="codFranja" value='<%= paux.getFinHora()%>' readonly></td>
+                            <td><input type="text" name ="codAula" value='<%= paux.getCodAula()%>' readonly></td>
+                            <td><input type="text" name ="codFranja" value='<%= paux.getDescripcion()%>' readonly></td>
                         </tr>
                     </form>
 

@@ -15,20 +15,25 @@
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
+        <link rel="stylesheet" type="text/css" href="../css/rolAdminGeneral.css">
     </head>
-    
-    <body>
-        
-        Bienvenido, Administrador general<br><br>
-        
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
-            
-            <input type="submit" class="elemento" name="gestionarUsuarios" value="Gestionar usuarios"/><br><br>
-            <input type="submit" class="elemento" name="gestionarRoles" value="Gestionar roles"/><br><br>
-            <input type="submit" class="elemento" name="verReservas" value="Ver reservas"/><br><br>
-            <input type="submit" class="elemento" name="verBitacora" value="Ver bitácora"/>
 
-        </form>
-        
+    <body>
+
+        <div id="contenedorPrincipal">
+
+            <form name="form" action="../Controladores/controlador.jsp" method="POST">
+
+                <h1>Bienvenido, Administrador general</h1>
+
+                <input type="submit" name="gestionarUsuarios" value="Gestionar usuarios"/><br><br>
+                <input type="submit" name="gestionarRoles" value="Gestionar roles"/><br><br>
+                <input type="submit" name="verReservas" value="Ver reservas"/><br><br>
+                <input type="submit" name="verBitacora" value="Ver bitácora"/>
+
+            </form>
+
+        </div>
+
     </body>
 </html>

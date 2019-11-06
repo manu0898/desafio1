@@ -19,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/gestionarRoles.css">
 
         <script>
             function myFunction() {
@@ -57,6 +58,7 @@
 
         <div id="contenedorPrincipal">
             <div id="tabla">
+                <h1>Gestión de roles</h1>
                 <table>
                     <tr>
                         <th>Profesor</th>
@@ -70,10 +72,10 @@
 
                     <form name="for" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="profRol" value='<%= paux.getProfesor()%>' readonly></td>
-                            <td><input type="number" class="elemento" name ="codRol" value='<%= paux.getCodRol()%>' min="0" max="2"></td>
+                            <td><input type="text" name ="profRol" value='<%= paux.getProfesor()%>' readonly></td>
+                            <td><input type="number" name ="codRol" value='<%= paux.getCodRol()%>' min="0" max="2"></td>
 
-                            <td><input type="submit" class="elemento" name="modifCRUDRol" value="Modificar"></td>
+                            <td><input type="submit" name="modifCRUDRol" value="Modificar"></td>
                         </tr>
                     </form>
 
@@ -84,12 +86,6 @@
                     %>
 
                 </table>
-            </div>
-
-            <div id="botones">
-                <form name="form" action="../Controladores/controlador.jsp" method="POST">
-                    <input type="submit" class="elemento" name="volverUsuario" value="Volver">
-                </form>
             </div>
 
         </div>

@@ -119,7 +119,8 @@
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
                     <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
-                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas</a>
+                    <a href="../Vistas/ventanaDetallesFranjas.jsp">Ver detalles franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -134,29 +135,28 @@
         %>
 
         <div id="contenedorPrincipal">
-            <br><br>
-            Nombre:
-            <%= u.getNombre()%>
-            <br><br>
-            <br><br>
-            Apellido:
-            <%= u.getApellido()%>
-            <br><br>
-            <br><br>
-            Correo:
-            <%= u.getCorreo()%>
-            <br><br>
-            <br><br>
-            Edad:
-            <%= u.getEdad()%> años
-            <br><br>
-            <br><br>
-            Foto:
-            <img src='<%=u.getFotoimgString()%>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
 
             <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-                <input type="submit" class="elemento" name="cambiarContra" value="Cambiar contraseña"><br><br>
-                <input type="submit" class="elemento" name="cambiarFoto" value="Cambiar foto">
+
+                <h1>Tu perfil</h1>
+                
+                <h3>Nombre:</h3>
+                <%= u.getNombre()%>
+                
+                <h3>Apellido:</h3>
+                <%= u.getApellido()%>
+                
+                <h3>Correo:</h3>
+                <%= u.getCorreo()%>
+                
+                <h3>Edad:</h3>
+                <%= u.getEdad()%> años
+                
+                <h3>Foto:</h3>
+                <img src='<%=u.getFotoimgString()%>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
+
+                <input type="submit" name="cambiarContra" value="Cambiar contraseña"><br><br>
+                <input type="submit" name="cambiarFoto" value="Cambiar foto">
             </form>
         </div>
     </body>

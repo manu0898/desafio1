@@ -51,6 +51,8 @@
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
                     <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas</a>
+                    <a href="../Vistas/ventanaDetallesFranjas.jsp">Ver detalles franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -94,11 +96,11 @@
 
                     <form name="form2" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="hInicio" value='<%= paux.getHoraInicio()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="hFin" value='<%= paux.getHoraFin()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="reservado" value='<%= paux.getReservado()%>'></td>
+                            <td><input type="text" name ="hInicio" value='<%= paux.getHoraInicio()%>' readonly></td>
+                            <td><input type="text" name ="hFin" value='<%= paux.getHoraFin()%>' readonly></td>
+                            <td><input type="text" name ="reservado" value='<%= paux.getReservado()%>'></td>
 
-                            <td><input type="submit" class="elemento" name="reservarAulaUsu" value="Reservar"></td>
+                            <td><input type="submit" name="reservarAulaUsu" value="Reservar"></td>
                         </tr>
                     </form>
 

@@ -15,21 +15,27 @@
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
+        <link rel="stylesheet" type="text/css" href="../css/rolAdminAula.css">
     </head>
 
     <body>
 
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
+        <div id="contenedorPrincipal">
 
-            Elige el rol con el que quieres acceder 
-            <br><br><select name="eligeRolAA" class="elemento">
-                <option value='adminAula'>Adiministrador de aulas</option>
-                <option value='profesor'>Profesor</option>
-            </select><br><br>
+            <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            <input type="submit" class="elemento" name="entrarAdminAula" value="Entrar"><br><br>
-            <input type="submit" class="elemento" name="cerrarSesion" value="Cerrar sesión"/>
-        </form>
+                <h1>Elige el rol con el que quieres acceder</h1> 
+                
+                <br><select name="eligeRolAA">
+                    <option value='adminAula'>Adiministrador de aulas</option>
+                    <option value='profesor'>Profesor</option>
+                </select><br><br>
+
+                <input type="submit" name="entrarAdminAula" value="Entrar"><br><br>
+                <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
+            </form>
+
+        </div>
 
     </body>
 </html>

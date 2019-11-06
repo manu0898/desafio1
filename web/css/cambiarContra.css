@@ -1,0 +1,18 @@
+#contenedorPrincipal {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+body {
+    background-color: #789BFF;
+    text-align: center;
+    margin: auto 0px;
+}
+
+input {
+    text-align: center;
+}
+

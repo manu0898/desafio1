@@ -15,18 +15,23 @@
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
+        <link rel="stylesheet" type="text/css" href="../css/rolAdminAula.css">
     </head>
-    
+
     <body>
-        
-        Bienvenido, Administrador de aulas<br><br>
-        
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            <input type="submit" class="elemento" name="gestionarAulas" value="Gestionar aulas"/><br><br>
-            <input type="submit" class="elemento" name="gestionarFranjHorarias" value="Gestionar franjas horarias"/>
+        <div id="contenedorPrincipal"> 
 
-        </form>
-        
+            <form name="form" action="../Controladores/controlador.jsp" method="POST">
+
+                <h1>Bienvenido, Administrador de aulas</h1>
+
+                <input type="submit" name="gestionarAulas" value="Gestionar aulas"/><br><br>
+                <input type="submit" name="gestionarFranjHorarias" value="Gestionar franjas horarias"/>
+
+            </form>
+
+        </div>
+
     </body>
 </html>

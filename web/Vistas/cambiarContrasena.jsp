@@ -16,7 +16,8 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/cambiarContra.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -28,16 +29,23 @@
             }
         </script>
     </head>
-    
+
     <body>
-        
-        <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-            Nueva contraseña: <input type="password" class="elemento" name ="pw" value=''><br><br>
-            Repite la contraseña: <input type="password" class="elemento" name ="pw2" value=''><br><br> 
+
+        <div id="contenedorPrincipal">
+
+            <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
+                
+                <h1>Cambio de contraseña</h1>
+                
+                <h3>Nueva contraseña:</h3> <input type="password" name ="pw" value=''><br><br>
+                <h3>Repite la contraseña:</h3> <input type="password" name ="pw2" value=''><br><br> 
+
+                <input type="submit" name="cambiarContraUsu" value="Cambiar"><br><br>
+                <input type="submit" name="volverPerfil" value="Volver">
+            </form>
             
-            <input type="submit" class="elemento" name="cambiarContraUsu" value="Cambiar"><br><br>
-            <input type="submit" class="elemento" name="volverPerfil" value="Volver">
-        </form>
+        </div>
         
     </body>
 </html>

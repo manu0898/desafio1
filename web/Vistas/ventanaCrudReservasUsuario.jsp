@@ -57,7 +57,8 @@
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
                     <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
-                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas</a>
+                    <a href="../Vistas/ventanaDetallesFranjas.jsp">Ver detalles franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -79,11 +80,11 @@
 
                     <form name="form2" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="codAulaR" value='<%= paux.getCodAula()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="codFranjaR" value='<%= paux.getCodFranja()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="fechaR" value='<%= paux.getFecha()%>' readonly></td>
+                            <td><input type="text" name ="codAulaR" value='<%= paux.getCodAula()%>' readonly></td>
+                            <td><input type="text" name ="codFranjaR" value='<%= paux.getCodFranja()%>' readonly></td>
+                            <td><input type="text" name ="fechaR" value='<%= paux.getFecha()%>' readonly></td>
 
-                            <td><input type="submit" class="elemento" name="elimReserva" value="Eliminar reserva"></td>
+                            <td><input type="submit" name="elimReserva" value="Eliminar reserva"></td>
                         </tr>
                     </form>
 

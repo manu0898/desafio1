@@ -10,27 +10,33 @@
     font-size: 15px;
 }
 
-#menu {
-
-}
-
-/*
-h1 {
-    font-size:5vw;
-}
-
-p {
-    font-size:2vw;
-}
-
 input {
-    font-size:2vw;
+    font-size: 15px;
 }
-*/
+
+select {
+    font-size: 15px;
+}
 
 
 /* Smartphone */
 @media only screen and (max-width: 480px) {
+    h1 {
+        font-size:10vw;
+    }
+
+    h3 {
+        font-size:5vw;
+    }
+
+    input {
+        font-size:4vw;
+    }
+    
+    select {
+        font-size:4vw;
+    }
+
     .topnav {
         overflow: hidden;
         background-color: #333;
@@ -65,7 +71,24 @@ input {
 }
 
 /* Tablets */
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 1023px) {
+    
+    h1 {
+        font-size:7vw;
+    }
+
+    h3 {
+        font-size:4vw;
+    }
+
+    input {
+        font-size:3vw;
+    }
+    
+    select {
+        font-size:3vw;
+    }
+    
     .topnav {
         overflow: hidden;
         background-color: #333;
@@ -101,7 +124,7 @@ input {
 
 /* Desktop */
 @media only screen and (min-width: 1025px) {
-    
+
     .topnav {
         overflow: hidden;
         background-color: #333;
@@ -133,8 +156,8 @@ input {
         background-color: #ddd;
         color: black;
     }
-    
-    
+
+
     /*
     #menu_on{
         float: right;

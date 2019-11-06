@@ -20,7 +20,8 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/gestionarAulas.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -54,7 +55,7 @@
             </nav>
         </div>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaAdminAula.jsp">Principal</a>
@@ -71,7 +72,11 @@
         </header>
 
         <div id="contenedorPrincipal">
+
             <div id="tabla">
+
+                <h1>Gestión de aulas</h1><br><br>
+
                 <table>
                     <tr>
                         <th>Código de aula</th>
@@ -83,11 +88,11 @@
 
                     <form name="for" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="codAula" value='<%= paux.getCodAula()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="descripcion" value='<%= paux.getDescripcion()%>'></td>
+                            <td><input type="text" name ="codAula" value='<%= paux.getCodAula()%>' readonly></td>
+                            <td><input type="text" name ="descripcion" value='<%= paux.getDescripcion()%>'></td>
 
-                            <td><input type="submit" class="elemento" name="elimCRUDAula" value="Eliminar"></td>
-                            <td><input type="submit" class="elemento" name="modifCRUDAula" value="Modificar"></td>
+                            <td><input type="submit" name="elimCRUDAula" value="Eliminar"></td>
+                            <td><input type="submit" name="modifCRUDAula" value="Modificar"></td>
                         </tr>
                     </form>
 
@@ -99,19 +104,13 @@
 
                     <form name="form" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="codAulaAdd" value=""></td>
-                            <td><input type="text" class="elemento" name ="descripcionAdd" value=""></td>
-                            <td><input type="submit" class="elemento" name="crearAula" value="Añadir"></td>
+                            <td><input type="text" name ="codAulaAdd" value=""></td>
+                            <td><input type="text" name ="descripcionAdd" value=""></td>
+                            <td><input type="submit" name="crearAula" value="Añadir"></td>
                         </tr>
 
                     </form>
                 </table>
-
-                <div id="botones">
-                    <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-                        <input type="submit" class="elemento" name="volverAula" value="Volver">
-                    </form>
-                </div>
             </div>
         </div>
     </body>

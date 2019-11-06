@@ -18,7 +18,8 @@
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/verTodasReservas.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -54,7 +55,7 @@
             </nav>
         </div>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a>
@@ -73,7 +74,9 @@
         </header>
 
         <div id="contenedorPrincipal">
+            
             <div id="tabla">
+                <h1>Lista de reservas</h1>
                 <table>
                     <tr>
                         <th>Cod Aula</th>
@@ -87,12 +90,12 @@
 
                     <form name="for" action="../Controladores/controlador.jsp" method="POST">
                         <tr>
-                            <td><input type="text" class="elemento" name ="codAulaCru" value='<%= paux.getCodAula()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="codFranjaCru" value='<%= paux.getCodFranja()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="profesorCru" value='<%= paux.getProfesor()%>' readonly></td>
-                            <td><input type="text" class="elemento" name ="fechaCru" value='<%= paux.getFecha()%>' readonly></td>
-                            
-                            <td><input type="submit" class="elemento" name="elimCRUReservas" value="Eliminar"></td>
+                            <td><input type="text" name ="codAulaCru" value='<%= paux.getCodAula()%>' readonly></td>
+                            <td><input type="text" name ="codFranjaCru" value='<%= paux.getCodFranja()%>' readonly></td>
+                            <td><input type="text" name ="profesorCru" value='<%= paux.getProfesor()%>' readonly></td>
+                            <td><input type="text" name ="fechaCru" value='<%= paux.getFecha()%>' readonly></td>
+
+                            <td><input type="submit" name="elimCRUReservas" value="Eliminar"></td>
                         </tr>
                     </form>
 
@@ -102,12 +105,6 @@
 
                     %>
                 </table>
-            </div>
-
-            <div id="botones">
-                <form name="form" action="../Controladores/controlador.jsp" method="POST">
-                    <br><br><input type="submit" class="elemento" name="volverUsuario" value="Volver">
-                </form>
             </div>
 
         </div>

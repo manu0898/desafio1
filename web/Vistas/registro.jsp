@@ -34,26 +34,26 @@
             <form name="form" enctype="multipart/form-data" action="../Controladores/subefichero.jsp" method="POST">
 
                 Correo
-                <input type="email" class="elemento" id="correoReg" name="correoReg" placeholder="correo@correo.com">
+                <input type="email" id="correoReg" name="correoReg" placeholder="correo@correo.com">
                 <br><br>Nombre
-                <input type="text" class="elemento" id="nombreReg" name="nombreReg" placeholder="nombre">
+                <input type="text" id="nombreReg" name="nombreReg" placeholder="nombre">
                 <br><br>Apellido
-                <input type="text" class="elemento" id="apellidoReg" name="apellidoReg" placeholder="apellido">
+                <input type="text" id="apellidoReg" name="apellidoReg" placeholder="apellido">
                 <br><br>Edad
-                <input type="number" class="elemento" id="edadReg" name="edadReg" value="0"/>
+                <input type="number" id="edadReg" name="edadReg" value="0"/>
                 <br><br>Contraseña
-                <input type="password" class="elemento" id="contraReg" name="contraReg" placeholder="contraseña">
+                <input type="password" id="contraReg" name="contraReg" placeholder="contraseña">
                 <br><br>Contraseña
-                <input type="password" class="elemento" id="contra2Reg" name="contra2Reg" placeholder="contraseña">
+                <input type="password" id="contra2Reg" name="contra2Reg" placeholder="contraseña">
                 <br><br>Foto
-                <input type="file" class="elemento" id="fichero" name="fichero"/><br>
+                <input type="file" id="fichero" name="fichero"/><br><br>
 
-                <input type="submit" class="elemento" id="registrar" name="registrar" value="Aceptar"/>
+                <input type="submit" id="registrar" name="registrar" value="Aceptar"/>
 
             </form>
 
             <form name="form2" action="../Controladores/controlador.jsp" method="POST">
-                <br><input type="submit" class="elemento" name="volver" value="Volver"/>
+                <br><input type="submit" name="volver" value="Volver"/>
             </form>
         </div>
 

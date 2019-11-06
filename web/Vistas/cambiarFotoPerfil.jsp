@@ -15,9 +15,9 @@
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
-        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/cambiarFoto.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -29,18 +29,25 @@
             }
         </script>
     </head>
-    
+
     <body>
-        
-        <form name="formContra" enctype="multipart/form-data" action="../Controladores/actulizaFoto.jsp" method="POST">
-            Foto <input type="file" class="elemento" id="fichero2" name="fichero2"/><br><br><br><br> 
-            
-            <input type="submit" class="elemento" name="cambiarFotoUsu" value="Cambiar"><br><br>
-        </form>
+
+        <div id="contenedorPrincipal">
+
+            <form name="formContra" enctype="multipart/form-data" action="../Controladores/actulizaFoto.jsp" method="POST">
+                
+                <h1>Cambio de foto de perfil</h1>
+                
+                Foto <input type="file" id="fichero2" name="fichero2"/><br><br><br><br> 
+
+                <input type="submit" name="cambiarFotoUsu" value="Cambiar"><br><br>
+            </form>
+        </div>
         
         <form name="form" action="../Controladores/controlador.jsp" method="POST">
-            <input type="submit" class="elemento" name="volverPerfil" value="Volver">
+            <input type="submit" name="volverPerfil" value="Volver">
         </form>
-        
+
+
     </body>
 </html>

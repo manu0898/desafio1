@@ -18,6 +18,18 @@ select {
     font-size: 15px;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+h1 {
+    font-family: sans-serif;
+}
+h3 {
+    font-family: sans-serif;
+}
+
 
 /* Smartphone */
 @media only screen and (max-width: 480px) {
@@ -71,7 +83,7 @@ select {
 }
 
 /* Tablets */
-@media only screen and (max-width: 1023px) {
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
     
     h1 {
         font-size:7vw;
@@ -123,7 +135,7 @@ select {
 }
 
 /* Desktop */
-@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1024px) {
 
     .topnav {
         overflow: hidden;

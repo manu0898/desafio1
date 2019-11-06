@@ -50,7 +50,6 @@
                 <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
-                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
                     <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas</a>
                     <a href="../Vistas/ventanaDetallesFranjas.jsp">Ver detalles franjas</a>
                 </div>
@@ -112,7 +111,7 @@
 
                 </table>
             </div>
-
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
     </body>
 </html>

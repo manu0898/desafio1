@@ -95,6 +95,7 @@
 
                 <br><br><input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
             </form>
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
 
     </body>

@@ -26,16 +26,16 @@
     <body>
 
         <div id="contenedorPrincipal">
-            
+
             <h1>Recuperar contraseña</h1>
-            
+
             <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
                 Correo <input type="email" name="emailContra" placeholder="correo@correo.com"/><br><br>
 
-            <input type="submit" name="enviarContra" value="Enviar"/>
-            <input type="submit" name="volverContra" value="Volver"/>
-        </form>
-            
+                <input type="submit" name="enviarContra" value="Enviar"/>
+                <input type="submit" name="volverContra" value="Volver"/>
+            </form>
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
 
     </body>

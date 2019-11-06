@@ -55,6 +55,8 @@
             <form name="form2" action="../Controladores/controlador.jsp" method="POST">
                 <br><input type="submit" name="volver" value="Volver"/>
             </form>
+            
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
 
     </body>

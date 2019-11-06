@@ -139,25 +139,28 @@
             <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
 
                 <h1>Tu perfil</h1>
-                
+
                 <h3>Nombre:</h3>
                 <%= u.getNombre()%>
-                
+
                 <h3>Apellido:</h3>
                 <%= u.getApellido()%>
-                
+
                 <h3>Correo:</h3>
                 <%= u.getCorreo()%>
-                
+
                 <h3>Edad:</h3>
                 <%= u.getEdad()%> años
-                
+
                 <h3>Foto:</h3>
                 <img src='<%=u.getFotoimgString()%>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
 
                 <input type="submit" name="cambiarContra" value="Cambiar contraseña"><br><br>
                 <input type="submit" name="cambiarFoto" value="Cambiar foto">
             </form>
+                <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
+
+        
     </body>
 </html>

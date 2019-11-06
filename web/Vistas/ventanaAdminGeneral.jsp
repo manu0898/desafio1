@@ -32,7 +32,7 @@
                 <input type="submit" name="verBitacora" value="Ver bitácora"/>
 
             </form>
-
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
 
     </body>

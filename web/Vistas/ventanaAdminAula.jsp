@@ -30,7 +30,7 @@
                 <input type="submit" name="gestionarFranjHorarias" value="Gestionar franjas horarias"/>
 
             </form>
-
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
 
     </body>

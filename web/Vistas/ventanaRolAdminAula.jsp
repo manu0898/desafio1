@@ -25,7 +25,7 @@
             <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
                 <h1>Elige el rol con el que quieres acceder</h1> 
-                
+
                 <br><select name="eligeRolAA">
                     <option value='adminAula'>Adiministrador de aulas</option>
                     <option value='profesor'>Profesor</option>
@@ -34,7 +34,7 @@
                 <input type="submit" name="entrarAdminAula" value="Entrar"><br><br>
                 <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
             </form>
-
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
 
     </body>

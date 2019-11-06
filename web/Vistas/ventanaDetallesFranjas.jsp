@@ -56,9 +56,9 @@
 
         <div id="contenedorPrincipal">
             <div id="tabla">
-                
+
                 <h1>Detalle de las franjas horarias:</h1>
-                
+
                 <table>
                     <tr>
                         <th>Código de franja</th>
@@ -85,6 +85,7 @@
 
                 </table>
             </div>
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
     </body>
 </html>

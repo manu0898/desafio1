@@ -99,7 +99,7 @@
 
                 </table>
             </div>
-
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
         </div>
     </body>
 </html>

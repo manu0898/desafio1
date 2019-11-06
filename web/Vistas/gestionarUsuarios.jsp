@@ -115,6 +115,6 @@
                 <input type="submit" class="elemento" name="anadirUsuario" value="Añadir usuario">
             </form>
         </div>
-
+        <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
     </body>
 </html>

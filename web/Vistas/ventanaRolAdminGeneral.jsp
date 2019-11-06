@@ -17,22 +17,25 @@
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" type="text/css" href="../css/rolAdminGeneral.css">
     </head>
-    
+
     <body>
-        
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            <h1>Elige el rol con el que quieres acceder</h1>
-            
-            <br><br><select name="eligeRolAG">
-                <option value='adminGeneral'>Adiministrador general</option>
-                <option value='adminAula'>Adiministrador de aulas</option>
-                <option value='profesor'>Profesor</option>
-            </select><br><br>
+        <div id="contenedorPrincipal">
 
-            <input type="submit" name="entrarAdminGen" value="Entrar"><br><br>
-            <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
-        </form>
-        
+            <form name="form" action="../Controladores/controlador.jsp" method="POST">
+
+                <h1>Elige el rol con el que quieres acceder</h1>
+
+                <br><br><select name="eligeRolAG">
+                    <option value='adminGeneral'>Adiministrador general</option>
+                    <option value='adminAula'>Adiministrador de aulas</option>
+                    <option value='profesor'>Profesor</option>
+                </select><br><br>
+
+                <input type="submit" name="entrarAdminGen" value="Entrar"><br><br>
+                <input type="submit" name="cerrarSesion" value="Cerrar sesión"/>
+            </form>
+            <footer>Manuel Ruiz González, 2ºDAW, CIFP Virgen de Gracia</footer>
+        </div>
     </body>
 </html>

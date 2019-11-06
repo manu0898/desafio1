@@ -1,0 +1,20 @@
+#contenedorPrincipal {
+    text-align: center;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: pink;
+    margin: auto 0px;
+}
+
+input {
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+}
+

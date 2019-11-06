@@ -17,13 +17,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ventana del profesor</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/ventanaProfesor.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -52,12 +54,14 @@
             </ul>
         </nav>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                    <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -65,31 +69,32 @@
             </div>
         </header>
 
-        <form name="form" action="../Controladores/controlador.jsp" method="POST">
+        <div id="contenedorPrincipal">
+            <form name="form" action="../Controladores/controlador.jsp" method="POST">
 
-            Fecha <input type="date" class="elemento" name="fechaR"><br><br>
-            Elige aula 
-            <select name="eligeAula" class="elemento">
+                Fecha <input type="date" class="elemento" name="fechaR"><br><br>
+                Elige aula 
+                <select name="eligeAula" class="elemento">
 
-                <%                    
-                    for (Aula paux : aulas) {
-                %>
+                    <%                    for (Aula paux : aulas) {
+                    %>
 
-                <option value='<%= paux.getCodAula()%>'><%= paux.getCodAula()%></option>
+                    <option value='<%= paux.getCodAula()%>'><%= paux.getCodAula()%></option>
 
-                <%
+                    <%
 
-                    }
+                        }
 
-                %>
+                    %>
 
-            </select><br><br>
+                </select><br><br>
 
-            <input type="submit" class="elemento" name="verCuadrante" value="Ver cuadrante"><br><br>
-            <input type="submit" class="elemento" name="verMisReservas" value="Ver mis reservas"><br><br>
+                <input type="submit" class="elemento" name="verCuadrante" value="Ver cuadrante"><br><br>
+                <input type="submit" class="elemento" name="verMisReservas" value="Ver mis reservas"><br><br>
 
-            <br><br><input type="submit" class="elemento" name="cerrarSesion" value="Cerrar sesión"/>
-        </form>
+                <br><br><input type="submit" class="elemento" name="cerrarSesion" value="Cerrar sesión"/>
+            </form>
+        </div>
 
     </body>
 </html>

@@ -11,12 +11,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reservas del usuario</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/crudReservasUsuario.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <script>
@@ -55,6 +56,8 @@
                 <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                    <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -91,13 +94,6 @@
                     %>
 
                 </table>
-            </div>
-
-            <div id="botones">
-                <form name="form" action="../Controladores/controlador.jsp" method="POST">
-                    <input type="submit" class="elemento" name="mostrarDetalles" value="Mostrar detalles">
-                    <input type="submit" class="elemento" name="volverReserva" value="Volver">
-                </form>
             </div>
 
         </div>

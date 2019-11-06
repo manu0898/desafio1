@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gestión de roles</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">

@@ -1,0 +1,17 @@
+#contenedorPrincipal {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: pink;
+    text-align: center;
+    margin: auto 0px;
+}
+
+input {
+    text-align: center;
+}
+

@@ -13,11 +13,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Detalles</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myLinks");
+                if (x.style.display === "block") {
+                    x.style.display = "none";
+                } else {
+                    x.style.display = "block";
+                }
+            }
+        </script>
     </head>
 
     <body>
@@ -29,14 +42,31 @@
 
         %>
 
+        <!--
         <div id="menu">
             <nav>
                 <ul>
-                    <li><a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a></li>
-                    <li><a href="../Vistas/editarPerfil.jsp">Perfil</a></li>
+                    <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
+                    <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                    <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
                 </ul>
             </nav>
         </div>
+        -->
+        <header id="menu">
+            <div class="topnav">
+                <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
+                <div id="myLinks">
+                    <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                    <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
+                </div>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </header>
 
         <div id="contenedorPrincipal">
 
@@ -96,12 +126,6 @@
                     %>
 
                 </table>
-            </div>
-
-            <div id="botones">
-                <form name="form" action="../Controladores/controlador.jsp" method="POST">
-                    <input type="submit" class="elemento" name="volverDetalle" value="Volver">
-                </form>
             </div>
 
         </div>

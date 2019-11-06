@@ -1,0 +1,16 @@
+#contenedorPrincipal {
+    text-align: center;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    background-color: pink;
+    margin: auto 0px;
+}
+
+input {
+    text-align: center;
+}
+

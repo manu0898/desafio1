@@ -11,13 +11,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Realizar Reserva</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/realizarReserva.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -42,12 +44,13 @@
             </nav>
         </div>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -55,28 +58,28 @@
             </div>
         </header>
 
+        <%
+
+            LinkedList<Reserva> reservas = (LinkedList) session.getAttribute("reservasHoras");
+
+            String fechaReserva = (String) session.getAttribute("fechaRes");
+            String aula = String.valueOf(session.getAttribute("aulaRes"));
+            int aulaA = Integer.parseInt(aula);
+
+            session.setAttribute("fechaResVentana", fechaReserva);
+            session.setAttribute("aulaResVentana", aula);
+        %>
+        <h3>Fecha: </h3>
+        <%
+            out.print(fechaReserva);
+        %>
+
+        <h3>Aula: </h3>
+        <%
+            out.print(aulaA);
+        %>
+
         <div id="contenedorPrincipal">
-            <%
-
-                LinkedList<Reserva> reservas = (LinkedList) session.getAttribute("reservasHoras");
-
-                String fechaReserva = (String) session.getAttribute("fechaRes");
-                String aula = String.valueOf(session.getAttribute("aulaRes"));
-                int aulaA = Integer.parseInt(aula);
-
-                session.setAttribute("fechaResVentana", fechaReserva);
-                session.setAttribute("aulaResVentana", aula);
-            %>
-            Fecha: 
-            <%
-                out.print(fechaReserva);
-            %>
-            <br>
-            Aula:
-            <%
-                out.print(aulaA);
-            %>
-
             <div id="tabla">
                 <table>
                     <tr>
@@ -106,12 +109,6 @@
                     %>
 
                 </table>
-            </div>
-
-            <div id="botones">
-                <form name="form" action="../Controladores/controlador.jsp" method="POST">
-                    <input type="submit" class="elemento" name="volverReserva" value="Volver">
-                </form>
             </div>
 
         </div>

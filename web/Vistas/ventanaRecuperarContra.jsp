@@ -14,21 +14,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Recuperar contraseña</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
+        <link rel="stylesheet" type="text/css" href="../css/recuperarContra.css">
     </head>
 
     <body>
 
-        <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-            Correo: <input type="email" class="elemento" name="emailContra"/><br><br>
+        <div id="contenedorPrincipal">
+            
+            <h1>Recuperar contraseña</h1>
+            
+            <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
+                Correo <input type="email" class="elemento" name="emailContra" placeholder="correo@correo.com"/><br><br>
 
             <input type="submit" class="elemento" name="enviarContra" value="Enviar"/>
             <input type="submit" class="elemento" name="volverContra" value="Volver"/>
         </form>
+            
+        </div>
 
     </body>
 </html>

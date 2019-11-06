@@ -11,13 +11,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Perfil</title>
         <meta http-equiv="refresh" content="60;url=../index.html">
         <link rel="stylesheet" type="text/css" href="../css/micss.css">
         <link rel="stylesheet" type="text/css" href="../css/menu.css">
         <link rel="stylesheet" type="text/css" href="../css/tablas.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+        <link rel="stylesheet" type="text/css" href="../css/editarPerfil.css">
+
         <script>
             function myFunction() {
                 var x = document.getElementById("myLinks");
@@ -52,7 +54,7 @@
             </ul>
         </nav>
         -->
-        
+
         <header id="menu">
             <div class="topnav">
                 <a class="active" href="../Vistas/ventanaAdminGeneral.jsp">Principal</a>
@@ -69,7 +71,7 @@
                 </a>
             </div>
         </header>
-        
+
         <%
         } else {
             if (rol.equals("AdminAula")) {
@@ -116,6 +118,8 @@
                 <a class="active" href="../Vistas/ventanaProfesor.jsp">Principal</a>
                 <div id="myLinks">
                     <a href="../Vistas/editarPerfil.jsp">Perfil</a>
+                    <a href="../Vistas/ventanaCrudReservasUsuario.jsp">Ver mis reservas</a>
+                    <a href="../Vistas/ventanaDetalles.jsp">Ver detalles aulas y franjas</a>
                 </div>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -128,17 +132,32 @@
             }
 
         %>
-        
-        Nombre: <%= u.getNombre()%><br><br>
-        Apellido: <%= u.getApellido()%><br><br>
-        Correo: <%= u.getCorreo()%><br><br>
-        Edad: <%= u.getEdad()%> años<br><br>
-        Foto: <img src='<%=u.getFotoimgString() %>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
-        
-        <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
-            <input type="submit" class="elemento" name="cambiarContra" value="Cambiar contraseña"><br><br>
-            <input type="submit" class="elemento" name="cambiarFoto" value="Cambiar foto">
-        </form>
 
+        <div id="contenedorPrincipal">
+            <br><br>
+            Nombre:
+            <%= u.getNombre()%>
+            <br><br>
+            <br><br>
+            Apellido:
+            <%= u.getApellido()%>
+            <br><br>
+            <br><br>
+            Correo:
+            <%= u.getCorreo()%>
+            <br><br>
+            <br><br>
+            Edad:
+            <%= u.getEdad()%> años
+            <br><br>
+            <br><br>
+            Foto:
+            <img src='<%=u.getFotoimgString()%>' alt='Foto de perfil no encontrada' name ="ft"><br><br>
+
+            <form name="formContra" action="../Controladores/controlador.jsp" method="POST">
+                <input type="submit" class="elemento" name="cambiarContra" value="Cambiar contraseña"><br><br>
+                <input type="submit" class="elemento" name="cambiarFoto" value="Cambiar foto">
+            </form>
+        </div>
     </body>
 </html>

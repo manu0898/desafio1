@@ -67,10 +67,12 @@
                 </a>
             </div>
         </header>
+        
+        <h1>Contenido del archivo Bitácora</h1>
 
         <div id="contenedorPrincipal">
 
-            <h1>Contenido del archivo Bitácora</h1>
+            
 
             <%
                 //String texto;
